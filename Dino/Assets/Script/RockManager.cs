@@ -16,12 +16,14 @@ public class RockManager : MonoBehaviour
     public float _maxXpos;
     
     GameManager _gameMgr;
-    public GameObject[] _Rocks;
+    //public GameObject[] _rocks;
+    List<Rock> _rocks;
     void Start()
     {
         _rockTemplate.SetActive(false);
         _gameMgr = FindObjectOfType<GameManager>();
         _templatePos = _rockTemplate.transform.position;
+        _rocks = new List<Rock>();
     }
     public void Start_MakeRock()
     {
@@ -30,10 +32,12 @@ public class RockManager : MonoBehaviour
     }
     void MakeRock()
     {
+        
         if (_gameMgr._isGameOver == true)
             return;
-        // 게임오브젝트 복제
+        // 게임오브젝트 복제 및 큐에 담기
         GameObject cloneObj = Instantiate(_rockTemplate);
+        _rocks.Add(cloneObj.GetComponent<Rock>());
         // 랜덤 위치 생성
         float xPos = Random.Range(_minXpos, _maxXpos);
         cloneObj.transform.position = new Vector3(xPos, _templatePos.y, 0);
@@ -45,5 +49,14 @@ public class RockManager : MonoBehaviour
 
         // 지연재귀호출
         Invoke("MakeRock", _random_delay);
+    }
+
+    public void DestroyRocks()
+    {
+        for (int i = 0; i < _rocks.Count - 1; i++)
+        {
+            _rocks[i].Destroy();
+        }
+        _rocks.Clear();
     }
 }

@@ -60,8 +60,13 @@ public class Rock : MonoBehaviour
             _rotSpeed = 0.0f;
             // 투명화 변수 활성화
             _onGround = true;
+            // 객체 삭제 및 컬렉션 삭제
             Destroy(_rock, 1.0f);
         }
+    }
 
+    public void Destroy()
+    {
+        Destroy(_rock);
     }
 }

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject _UIStart;
     public GameObject _UIGameOver;
     RockManager _rockMgr;
+
     // 운석 중력제어
     // Start is called before the first frame update
     void Start()
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         _UIIntro.SetActive(false);
         _UIStart.SetActive(true);
         _UIGameOver.SetActive(false);
+        _rockMgr.DestroyRocks();
         _rockMgr.Start_MakeRock();
     }
     public void On_GameOver()
