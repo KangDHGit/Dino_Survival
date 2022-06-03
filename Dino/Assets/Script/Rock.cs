@@ -22,7 +22,7 @@ public class Rock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_GameMgr._isIntro || _GameMgr._isGameOver)
+        if (_GameMgr._isIntro || _GameMgr._isGameOver || _GameMgr._isPause)
             return;
         Drop();
         Rotation();

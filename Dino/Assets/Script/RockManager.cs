@@ -33,7 +33,7 @@ public class RockManager : MonoBehaviour
     void MakeRock()
     {
         
-        if (_gameMgr._isGameOver == true)
+        if (_gameMgr._isGameOver || _gameMgr._isPause)
             return;
         // 게임오브젝트 복제 및 큐에 담기
         GameObject cloneObj = Instantiate(_rockTemplate);
