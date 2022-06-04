@@ -52,21 +52,31 @@ public class Dino : MonoBehaviour
         {
             _moveQua = new Quaternion();
             _btnMgr.OnBtnRArrow();
+            MoveAnima();
         }
         else if (_keyHorizontal < 0)
         {
             _moveQua = new Quaternion(0, 180, 0, 0);
             _btnMgr.OnBtnLArrow();
+            MoveAnima();
         }
         else
         {
             _moveQua = transform.rotation;
             _btnMgr.OffBtnLArrow();
             _btnMgr.OffBtnRArrow();
+            StayAnima();
         }
         transform.rotation = _moveQua;
     }
-
+    void MoveAnima()
+    {
+        _animator.SetBool("isMove", true);
+    }
+    void StayAnima()
+    {
+        _animator.SetBool("isMove", false);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // 땅에 닿지 않은 운석일경우 게임오버

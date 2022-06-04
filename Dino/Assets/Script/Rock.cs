@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
-    public float _dropSpeed;
-    public float _rotSpeed;
-    float _rockRot;
-    float _alpha = 1.0f;
+    public float _dropSpeed;        // 낙하속도
+    public float _rotSpeed;         // 회전속도
+    float _rockRot;                 // 현재각도
+    public bool _onGround = false;  // 지면충돌 판정
+    float _alpha = 1.0f;            // 운석 투명도
+
     SpriteRenderer _sprRen;
-    public bool _onGround = false;
     GameManager _GameMgr;
-    public Object _rock;
+    AudioSource _landaudio;
+    public Object _rock;            // 운석
+
     // Start is called before the first frame update
     void Start()
     {
         _GameMgr = FindObjectOfType<GameManager>();
         _sprRen = GetComponent<SpriteRenderer>();
+        _landaudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,7 +40,6 @@ public class Rock : MonoBehaviour
     // 일정한 속도로 회전
     void Rotation()
     {
-
         _rockRot += _rotSpeed * Time.deltaTime;
         transform.rotation = Quaternion.Euler(0, 0, _rockRot);
     }
@@ -55,6 +58,7 @@ public class Rock : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
+            _landaudio.Play();
             // 추락 및 회전 멈춤
             _dropSpeed = 0.0f;
             _rotSpeed = 0.0f;
