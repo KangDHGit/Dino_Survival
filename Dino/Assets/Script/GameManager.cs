@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    static public GameManager I;
+
     public bool _isIntro = true;
     public bool _isGameOver = false;
     public bool _isPause = false;
@@ -14,14 +16,19 @@ public class GameManager : MonoBehaviour
     public GameObject _UIIntro;
     public GameObject _UIStart;
     public GameObject _UIPause;
-        public Text _txtPause;
-        public bool _isTxtPauseOn = false;
+    public Text _txtPause;
+    public bool _isTxtPauseOn = false;
     public GameObject _UIGameOver;
     // 게임 장애물 제어
     RockManager _rockMgr;
     // 점수
     public Text _txtScore;
     float _score = 0;
+
+    private void Awake()
+    {
+        I = this;
+    }
 
     void Start()
     {
