@@ -12,16 +12,9 @@ public class GameManager : MonoBehaviour
     public bool _isIntro = true;
     public bool _isGameOver = false;
     public bool _isPause = false;
-    // UI제어
-    public GameObject _UIIntro;
-    public GameObject _UIStart;
-    public GameObject _UIPause;
-    public Text _txtPause;
+    
     public bool _isTxtPauseOn = false;
-    public GameObject _UIGameOver;
-    // 게임 장애물 제어
-    RockManager _rockMgr;
-    // 점수
+    
     public Text _txtScore;
     float _score = 0;
 
@@ -32,14 +25,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // 게임 첫화면 UI 제어
-        _UIIntro.SetActive(true);
-        _UIStart.SetActive(false);
-        _UIPause.SetActive(false);
-        _UIGameOver.SetActive(false);
+        UI_Manager.I.Init();
 
-        _rockMgr = FindObjectOfType<RockManager>();
-        //점수초기화
         _score = 0;
     }
 
@@ -50,35 +37,35 @@ public class GameManager : MonoBehaviour
             return;
         PlusScore();
     }
-    // 게임시작, 다시생존 버튼 누를때
+    
     public void OnClick_GameStart()
     {
         _isIntro = false;
         _isGameOver = false;
 
-        _UIIntro.SetActive(false);
-        _UIStart.SetActive(true);
-        _UIGameOver.SetActive(false);
-        // 장애물 지우고 재생성
-        _rockMgr.DestroyRocks();
-        _rockMgr.Start_MakeRock();
-        // 점수초기화
+        UI_Manager.I._ui_Intro.SetActive(false);
+        UI_Manager.I._ui_Start.SetActive(true);
+        UI_Manager.I._ui_GameOver.SetActive(false);
+        
+        RockManager.I.DestroyRocks();
+        RockManager.I.Start_MakeRock();
+        
         _score = 0;
     }
-    // 일시정지 버튼
+    
     public void OnClick_Pause()
     {
         _isPause = true;
-        _UIPause.SetActive(true);
+        UI_Manager.I._ui_Pause.SetActive(true);
         Invoke("FlasingTxtPause", 1.0f);
     }
     public void OnClick_PauseReStart()
     {
-        _rockMgr.Start_MakeRock();
+        RockManager.I.Start_MakeRock();
         _isPause = false;
-        _UIPause.SetActive(false);
+        UI_Manager.I._ui_Pause.SetActive(false);
     }
-    // 일시정지 버튼 반짝임
+    
     void FlasingTxtPause()
     {
         if (_isPause == false)
@@ -86,25 +73,25 @@ public class GameManager : MonoBehaviour
         if(_isTxtPauseOn == false)
         {
             _isTxtPauseOn = true;
-            _txtPause.enabled = false;
+            UI_Manager.I._txt_Pause.enabled = false;
             Invoke("FlasingTxtPause", 1.0f);
         }
         else if(_isTxtPauseOn == true)
         {
             _isTxtPauseOn = false;
-            _txtPause.enabled = true;
+            UI_Manager.I._txt_Pause.enabled = true;
             Invoke("FlasingTxtPause", 1.0f);
         }
         return;
     }
 
-    // 게임오버시
+    
     public void On_GameOver()
     {
         _isGameOver = true;
-        _UIGameOver.SetActive(true);
+        UI_Manager.I._ui_GameOver.SetActive(true);
     }
-    // 점수 증가
+    
     void PlusScore()
     {
         _score += 10 * Time.deltaTime;

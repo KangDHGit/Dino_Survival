@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Dino : MonoBehaviour
 {
-    float _keyHorizontal;       //  ÁÂ¿ìÅ°ÀÔ·Â
-    Vector3 _moveVec;           //  ÀÌµ¿¹æÇâ
-    Quaternion _moveQua;        //  ÀÌµ¿°¢µµ(Ä³¸¯ÅÍÈ¸Àü)
-    public float _moveSpeed;    //  ÀÌµ¿¼Óµå
+    float _keyHorizontal;       
+    Vector3 _moveVec;           
+    Quaternion _moveQua;        
+    public float _moveSpeed;    
 
     public BtnManager _btnMgr;
     GameManager _GameMgr;
@@ -15,15 +15,13 @@ public class Dino : MonoBehaviour
 
     void Start()
     {
-        _GameMgr = FindObjectOfType<GameManager>();
         _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // ÀÎÆ®·ÎÀÌ°Å³ª °ÔÀÓ¿À¹ö, ÀÏ½ÃÁ¤Áö ÀÏ°æ¿ì ¾Ö´Ï¸ÞÀÌÅÍ ºñÈ°¼º ¹× Dino ¸ØÃß±â
-        if (_GameMgr._isIntro == true || _GameMgr._isGameOver == true || _GameMgr._isPause)
+        if (GameManager.I._isIntro == true || GameManager.I._isGameOver == true || GameManager.I._isPause)
         {   
             _animator.enabled = false;
             return;
@@ -34,18 +32,18 @@ public class Dino : MonoBehaviour
         Move();
         Look();
     }
-    // ÁÂ¿ì È­»ìÇ¥ Å°º¸µå ÀÔ·Â
+    
     void GetKey()
     {
         _keyHorizontal = Input.GetAxisRaw("Horizontal");
     }
-    // ÀÔ·ÂµÈ ¹æÇâÀ¸·Î ÀÌµ¿
+    
     void Move()
     {
         _moveVec = new Vector3(_keyHorizontal, 0);
         transform.position += _moveVec * _moveSpeed * Time.deltaTime;
     }
-    // ÀÌµ¿¹æÇâÀ¸·Î Ä³¸¯ÅÍ °¢µµÈ¸Àü ¹× ¹öÆ°UI È°¼ºÈ­
+    
     void Look()
     {
         if (_keyHorizontal > 0)
@@ -79,7 +77,7 @@ public class Dino : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ¶¥¿¡ ´êÁö ¾ÊÀº ¿î¼®ÀÏ°æ¿ì °ÔÀÓ¿À¹ö
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½î¼®ï¿½Ï°ï¿½ï¿½ ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½
         if(collision.tag == "Rock" && collision.GetComponent<Rock>()._onGround == false)
         {
             _GameMgr.On_GameOver();
