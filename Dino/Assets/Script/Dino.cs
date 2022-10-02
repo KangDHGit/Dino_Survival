@@ -10,7 +10,6 @@ public class Dino : MonoBehaviour
     public float _moveSpeed;    
 
     public BtnManager _btnMgr;
-    GameManager _GameMgr;
     Animator _animator;
 
     void Start()
@@ -80,7 +79,7 @@ public class Dino : MonoBehaviour
         // ���� ���� ���� ��ϰ�� ���ӿ���
         if(collision.tag == "Rock" && collision.GetComponent<Rock>()._onGround == false)
         {
-            _GameMgr.On_GameOver();
+            GameManager.I.On_GameOver();
         }
     }
 }
