@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
-    public float _dropSpeed;        // ³«ÇÏ¼Óµµ
-    public float _rotSpeed;         // È¸Àü¼Óµµ
-    float _rockRot;                 // ÇöÀç°¢µµ
-    public bool _onGround = false;  // Áö¸éÃæµ¹ ÆÇÁ¤
-    float _alpha = 1.0f;            // ¿î¼® Åõ¸íµµ
+    public float _dropSpeed;        // ï¿½ï¿½ï¿½Ï¼Óµï¿½
+    public float _rotSpeed;         // È¸ï¿½ï¿½ï¿½Óµï¿½
+    float _rockRot;                 // ï¿½ï¿½ï¿½ç°¢ï¿½ï¿½
+    public bool _onGround = false;  // ï¿½ï¿½ï¿½ï¿½ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½
+    float _alpha = 1.0f;            // ï¿½î¼® ï¿½ï¿½ï¿½ï¿½ï¿½
 
     SpriteRenderer _sprRen;
     GameManager _GameMgr;
     AudioSource _landaudio;
-    public Object _rock;            // ¿î¼®
+    public Object _rock;            // ï¿½î¼®
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +32,12 @@ public class Rock : MonoBehaviour
         Rotation();
         Alpha();
     }
-    // ÀÏÁ¤ÇÑ ¼Óµµ·Î ¶³¾îÁü
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void Drop()
     {
         transform.position += Vector3.down * _dropSpeed * Time.deltaTime;
     }
-    // ÀÏÁ¤ÇÑ ¼Óµµ·Î È¸Àü
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ È¸ï¿½ï¿½
     void Rotation()
     {
         _rockRot += _rotSpeed * Time.deltaTime;
@@ -45,7 +45,7 @@ public class Rock : MonoBehaviour
     }
     void Alpha()
     {
-        // Åõ¸íÈ­
+        // ï¿½ï¿½ï¿½ï¿½È­
         if (_onGround == true)
         {
             _sprRen.color = new Color(_sprRen.color.r, _sprRen.color.g, _sprRen.color.b, _alpha);
@@ -53,18 +53,18 @@ public class Rock : MonoBehaviour
                 _alpha -= 0.5f * Time.deltaTime;
         }
     }
-    // ¹Ù´ÚÃæµ¹Ã³¸®
+    // ï¿½Ù´ï¿½ï¿½æµ¹Ã³ï¿½ï¿½
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Ground")
         {
             _landaudio.Play();
-            // Ãß¶ô ¹× È¸Àü ¸ØÃã
+            // ï¿½ß¶ï¿½ ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             _dropSpeed = 0.0f;
             _rotSpeed = 0.0f;
-            // Åõ¸íÈ­ º¯¼ö È°¼ºÈ­
+            // ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
             _onGround = true;
-            // °´Ã¼ »èÁ¦ ¹× ÄÃ·º¼Ç »èÁ¦
+            // ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Destroy(_rock, 1.0f);
         }
     }
