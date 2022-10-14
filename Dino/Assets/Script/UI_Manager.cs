@@ -13,6 +13,8 @@ public class UI_Manager : MonoBehaviour
     public Text _txt_Pause;
     public bool _isTxtPauseOn = false;
     public GameObject _ui_GameOver;
+
+    public Text _txt_ScoreNum;
     private void Awake()
     {
         I = this;
@@ -33,5 +35,8 @@ public class UI_Manager : MonoBehaviour
         _ui_GameOver = transform.Find("UI_GameOver").gameObject;
         if (_ui_GameOver != null)
             _ui_GameOver.SetActive(false);
+        _txt_ScoreNum = transform.Find("UI_Start/Txt_ScoreNum").GetComponent<Text>();
+        if (_txt_ScoreNum != null)
+            _txt_ScoreNum.text = "0";
     }
 }

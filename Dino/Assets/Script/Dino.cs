@@ -20,16 +20,18 @@ public class Dino : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.I._isIntro == true || GameManager.I._isGameOver == true || GameManager.I._isPause)
-        {   
+        if (GameManager.I._isGameOver == true || GameManager.I._isPause)
+        {
             _animator.enabled = false;
             return;
         }
-        else
-            _animator.enabled = true;
-        GetKey();
-        Move();
-        Look();
+        _animator.enabled = true;
+        if (!GameManager.I._isIntro)
+        {
+            GetKey();
+            Move();
+            Look();
+        }
     }
     
     void GetKey()
@@ -76,7 +78,6 @@ public class Dino : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ���� ���� ���� ��ϰ�� ���ӿ���
         if(collision.tag == "Rock" && collision.GetComponent<Rock>()._onGround == false)
         {
             GameManager.I.On_GameOver();

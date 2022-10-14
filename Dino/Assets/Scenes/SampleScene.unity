@@ -613,7 +613,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306379557}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -951,7 +951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: -600}
   m_SizeDelta: {x: 600, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &434935869
@@ -1897,7 +1897,7 @@ MonoBehaviour:
   _isGameOver: 0
   _isPause: 0
   _isTxtPauseOn: 0
-  _txtScore: {fileID: 306379559}
+  _fever: 1
 --- !u!1 &970996705
 GameObject:
   m_ObjectHideFlags: 0
@@ -2690,13 +2690,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 140
-    m_Alignment: 4
+    m_Alignment: 7
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC0DD\uC874 \uC2DC\uC791!"
+  m_Text: START
 --- !u!222 &1281739418
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2736,9 +2736,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rockTemplate: {fileID: 1575634334}
   _minDelay: 0.5
-  _maxDelay: 2
-  _minXpos: -2
-  _maxXpos: 2
+  _maxDelay: 1
+  _minXpos: -2.45
+  _maxXpos: 2.45
 --- !u!4 &1362840100
 Transform:
   m_ObjectHideFlags: 0
@@ -2750,7 +2750,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1575634336}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2988,7 +2989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1506758701
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3191,8 +3192,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1362840100}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1575634337
 MonoBehaviour:
@@ -3206,10 +3207,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eaf532bbc3cc9546894243e62f40511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dropSpeed: 2
+  _dropSpeed: 4
   _rotSpeed: 90
   _onGround: 0
-  _rock: {fileID: 1575634334}
 --- !u!82 &1575634339
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3316,7 +3316,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -3375,7 +3375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1665246740
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3438,7 +3438,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 500}
-  m_SizeDelta: {x: 600, y: 300}
+  m_SizeDelta: {x: 1000, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1669635769
 MonoBehaviour:
@@ -3488,7 +3488,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC6B4\uC11D\uD53C\uD558\uAE30"
+  m_Text: DINO SURVIVAL
 --- !u!222 &1669635771
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3955,7 +3955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872658208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.65, z: 0}
+  m_LocalPosition: {x: 0, y: -1.630834, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3977,7 +3977,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -4058,7 +4058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1876334406
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4564,3 +4564,4 @@ MonoBehaviour:
   _txt_Pause: {fileID: 0}
   _isTxtPauseOn: 0
   _ui_GameOver: {fileID: 0}
+  _txt_ScoreNum: {fileID: 0}

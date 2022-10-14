@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
     public bool _isPause = false;
     
     public bool _isTxtPauseOn = false;
-    
-    public Text _txtScore;
+
+    double _nextFeverScore = 200;
+    public float _fever = 1;
     float _score = 0;
 
     private void Awake()
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         UI_Manager.I.Init();
-
+        RockManager.I.Init();
         _score = 0;
     }
 
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
     {
         if (_isGameOver || _isPause)
             return;
-        PlusScore();
+        //PlusScore();
     }
     
     public void OnClick_GameStart()
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
         UI_Manager.I._ui_GameOver.SetActive(false);
         
         RockManager.I.DestroyRocks();
-        RockManager.I.Start_MakeRock();
+        //RockManager.I.Start_MakeRock();
         
         _score = 0;
     }
@@ -92,10 +93,19 @@ public class GameManager : MonoBehaviour
         UI_Manager.I._ui_GameOver.SetActive(true);
     }
     
-    void PlusScore()
+    public void PlusScore(int point)
     {
-        _score += 10 * Time.deltaTime;
+        _score += (point * _fever);
         int score = Convert.ToInt32(_score);
-        _txtScore.text = score.ToString();
+        UI_Manager.I._txt_ScoreNum.text = score.ToString();
+
+        //ScoreCheck
+        if(_score >= _nextFeverScore)
+        {
+            _fever += 0.5f;
+            _nextFeverScore *= 2;
+            RockManager.I._rockTemplate.GetComponent<Rock>()._dropSpeed++;
+            Debug.Log("ScoreCheck Success");
+        }
     }
 }
