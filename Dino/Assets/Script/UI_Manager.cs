@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +14,8 @@ public class UI_Manager : MonoBehaviour
     public GameObject _ui_GameOver;
 
     public Text _txt_ScoreNum;
+    public Text _txt_Fever;
+    public int _fever_InitSize;
     private void Awake()
     {
         I = this;
@@ -38,5 +39,44 @@ public class UI_Manager : MonoBehaviour
         _txt_ScoreNum = transform.Find("UI_Start/Txt_ScoreNum").GetComponent<Text>();
         if (_txt_ScoreNum != null)
             _txt_ScoreNum.text = "0";
+        _txt_Fever = transform.Find("Txt_Fever").GetComponent<Text>();
+        if (_txt_Fever != null)
+        {
+            _fever_InitSize = _txt_Fever.fontSize;
+            _txt_Fever.gameObject.SetActive(false);
+        }
+    }
+
+    public IEnumerator TextSizeEffect(Text text, int speed)
+    {
+        while (_txt_Fever.gameObject.activeSelf)
+        {
+            int count = 0;
+            float time = 0;
+            _txt_Fever.fontSize = _fever_InitSize;
+            while (count <= 10)
+            {
+                time += UnityEngine.Time.deltaTime;
+                if (time >= 0.05f)
+                {
+                    _txt_Fever.fontSize += speed;
+                    time = 0.0f;
+                    count++;
+                }
+                yield return null;
+            }
+            while (count <= 20)
+            {
+                time += UnityEngine.Time.deltaTime;
+                if (time >= 0.05f)
+                {
+                    _txt_Fever.fontSize -= speed;
+                    time = 0.0f;
+                    count++;
+                }
+                yield return null;
+            }
+        }
+        yield return null;
     }
 }

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 3df7185619ed43241bdc00a160474367
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - QuinqueFive
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d46eeae6201104e41adb39bfda1b4141, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

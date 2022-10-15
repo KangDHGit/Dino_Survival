@@ -81,6 +81,7 @@ public class Dino : MonoBehaviour
         if(collision.tag == "Rock" && collision.GetComponent<Rock>()._onGround == false)
         {
             GameManager.I.On_GameOver();
+            GameManager.I.FeverInit();
         }
     }
 }

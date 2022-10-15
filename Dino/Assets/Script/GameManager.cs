@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     {
         UI_Manager.I.Init();
         RockManager.I.Init();
+        FireManager.I.Init();
+        SoundManager.I.Init();
+
         _score = 0;
     }
 
@@ -49,9 +52,12 @@ public class GameManager : MonoBehaviour
         UI_Manager.I._ui_GameOver.SetActive(false);
         
         RockManager.I.DestroyRocks();
-        //RockManager.I.Start_MakeRock();
-        
+
         _score = 0;
+        UI_Manager.I._txt_ScoreNum.text = _score.ToString();
+
+        SoundManager.I._bgm_Intro.Stop();
+        SoundManager.I._bgm_Start.Play();
     }
     
     public void OnClick_Pause()
@@ -62,9 +68,10 @@ public class GameManager : MonoBehaviour
     }
     public void OnClick_PauseReStart()
     {
-        RockManager.I.Start_MakeRock();
         _isPause = false;
         UI_Manager.I._ui_Pause.SetActive(false);
+        _score = 0;
+        UI_Manager.I._txt_ScoreNum.text = _score.ToString();
     }
     
     void FlasingTxtPause()
@@ -96,16 +103,34 @@ public class GameManager : MonoBehaviour
     public void PlusScore(int point)
     {
         _score += (point * _fever);
-        int score = Convert.ToInt32(_score);
-        UI_Manager.I._txt_ScoreNum.text = score.ToString();
+        UI_Manager.I._txt_ScoreNum.text = _score.ToString();
 
         //ScoreCheck
         if(_score >= _nextFeverScore)
         {
             _fever += 0.5f;
+            if (!UI_Manager.I._txt_Fever.gameObject.activeSelf)
+            {
+                UI_Manager.I._txt_Fever.gameObject.SetActive(true);
+                StartCoroutine(UI_Manager.I.TextSizeEffect(UI_Manager.I._txt_Fever, 1));
+            }
+            UI_Manager.I._txt_Fever.text = "FEVER " + String.Format($"{_fever : 0.0}");
             _nextFeverScore *= 2;
+
             RockManager.I._rockTemplate.GetComponent<Rock>()._dropSpeed++;
+            if(RockManager.I._maxDelay > 0.5f)
+                RockManager.I._maxDelay -= 0.05f;
+
             Debug.Log("ScoreCheck Success");
         }
+    }
+
+    public void FeverInit()
+    {
+        UI_Manager.I._txt_Fever.gameObject.SetActive(false);
+        RockManager.I._rockTemplate.GetComponent<Rock>()._dropSpeed = 4;
+        RockManager.I._maxDelay = 0.75f;
+        _fever = 1;
+        _nextFeverScore = 200;
     }
 }

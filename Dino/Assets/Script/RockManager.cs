@@ -56,12 +56,6 @@ public class RockManager : MonoBehaviour
             _nowTime = 0;
         }
     }
-    public void Start_MakeRock()
-    {
-        _random_delay = Random.Range(_minDelay, _maxDelay);
-        Invoke("MakeRock", _random_delay);
-    }
-
     public void DestroyRocks()
     {
         for (int i = 0; i < _rocks.Count; i++)
