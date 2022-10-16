@@ -18,7 +18,7 @@ public class RockManager : MonoBehaviour
     public float _maxXpos;
     
     //public List<Rock> _rocks;
-    public List<Rock> _rocks;
+    public List<GameObject> _list_Obj_rock;
 
     public void Awake()
     {
@@ -31,7 +31,7 @@ public class RockManager : MonoBehaviour
         if(_rockTemplate != null)
             _rockTemplate.SetActive(false);
         _templatePos = _rockTemplate.transform.position;
-        _rocks = new List<Rock>();
+        _list_Obj_rock = new List<GameObject>();
     }
 
     private void Update()
@@ -45,7 +45,7 @@ public class RockManager : MonoBehaviour
             GameObject cloneObj = Instantiate(_rockTemplate, this.transform);
             Rock cloneRock = cloneObj.GetComponent<Rock>();
             cloneRock.Init();
-            _rocks.Add(cloneRock);
+            _list_Obj_rock.Add(cloneRock.gameObject);
 
             float xPos = Random.Range(_minXpos, _maxXpos);
             cloneObj.transform.position = new Vector3(xPos, _templatePos.y, 0);
@@ -58,10 +58,10 @@ public class RockManager : MonoBehaviour
     }
     public void DestroyRocks()
     {
-        for (int i = 0; i < _rocks.Count; i++)
+        for (int i = 0; i < _list_Obj_rock.Count; i++)
         {
-            _rocks[i].Destroy();
+            Destroy(_list_Obj_rock[i]);
         }
-        _rocks.Clear();
+        _list_Obj_rock.Clear();
     }
 }

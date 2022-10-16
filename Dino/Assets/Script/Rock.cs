@@ -28,12 +28,16 @@ public class Rock : MonoBehaviour
     }
     void Drop()
     {
-        transform.position += Vector3.down * _dropSpeed * Time.deltaTime;
+        if(!_onGround)
+            transform.position += Vector3.down * _dropSpeed * Time.deltaTime;
     }
     void Rotation()
     {
-        _rockRot += _rotSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.Euler(0, 0, _rockRot);
+        if (!_onGround)
+        {
+            _rockRot += _rotSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(0, 0, _rockRot);
+        }
     }
     void Alpha()
     {
@@ -55,12 +59,7 @@ public class Rock : MonoBehaviour
             _onGround = true;
             Destroy(this.gameObject, 1.0f);
             GameManager.I.PlusScore(10);
+            this.GetComponent<Collider2D>().enabled = false;
         }
-    }
-
-    public void Destroy()
-    {
-        if (this != null)
-            Destroy(gameObject);
     }
 }

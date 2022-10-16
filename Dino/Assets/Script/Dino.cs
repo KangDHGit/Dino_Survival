@@ -78,7 +78,7 @@ public class Dino : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Rock" && collision.GetComponent<Rock>()._onGround == false)
+        if(collision.tag == "Obstacle")
         {
             GameManager.I.On_GameOver();
             GameManager.I.FeverInit();
