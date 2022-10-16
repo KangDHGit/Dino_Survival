@@ -17,7 +17,12 @@ public class SoundManager : MonoBehaviour
     {
         if (!transform.Find("Bgm_Intro").TryGetComponent(out _bgm_Intro))
             Debug.LogError("_bgm_Intro is Null");
+        else
+            _bgm_Intro.volume = 0.6f;
+
         if (!transform.Find("Bgm_Start").TryGetComponent(out _bgm_Start))
             Debug.LogError("_bgm_Start is Null");
+        else
+            _bgm_Start.volume = 0.6f;
     }
 }

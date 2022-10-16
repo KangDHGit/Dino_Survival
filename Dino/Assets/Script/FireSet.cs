@@ -4,12 +4,10 @@ using UnityEngine;
 public class FireSet : MonoBehaviour
 {
     GameObject _obj_Fire;
-    BoxCollider2D _fire_Col;
+    BoxCollider2D _col_Fire;
     Animator _anim_Fire;
 
     SpriteRenderer _spr_Warning;
-
-    public float _warningTime;
 
     public void Init()
     {
@@ -22,8 +20,8 @@ public class FireSet : MonoBehaviour
         if (_obj_Fire != null)
         {
             _obj_Fire.SetActive(false);
-            if (_obj_Fire.TryGetComponent(out _fire_Col))
-                _fire_Col.enabled = false;
+            if (_obj_Fire.TryGetComponent(out _col_Fire))
+                _col_Fire.enabled = false;
             else
                 Debug.LogError("_col is Null");
             if(!_obj_Fire.TryGetComponent(out _anim_Fire))
@@ -64,13 +62,13 @@ public class FireSet : MonoBehaviour
         if (this != null)
         {
             _obj_Fire.SetActive(true);
-            _fire_Col.enabled = true;
+            _col_Fire.enabled = true;
         }
 
         while (!GameManager.I._isIntro || !GameManager.I._isGameOver || !GameManager.I._isPause)
         {
-            if (_anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f && _fire_Col.isActiveAndEnabled)
-                _fire_Col.enabled = false;
+            if (_anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f && _col_Fire.isActiveAndEnabled)
+                _col_Fire.enabled = false;
 
             if (_anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {

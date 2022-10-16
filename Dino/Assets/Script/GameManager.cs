@@ -17,7 +17,10 @@ public class GameManager : MonoBehaviour
 
     double _nextFeverScore = 200;
     public float _fever = 1;
-    float _score = 0;
+    int _score = 0;
+    public int _bestScore;
+
+    const string KEY_BEST_SCORE = "user_data_best_score";
 
     private void Awake()
     {
@@ -26,12 +29,26 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        LoadScore();
         UI_Manager.I.Init();
         RockManager.I.Init();
         FireManager.I.Init();
         SoundManager.I.Init();
 
         _score = 0;
+    }
+
+    public void LoadScore()
+    {
+        if (PlayerPrefs.HasKey(KEY_BEST_SCORE))
+            _bestScore = PlayerPrefs.GetInt(KEY_BEST_SCORE);
+        else
+            _bestScore = 0;
+    }
+
+    public void SaveScore()
+    {
+        PlayerPrefs.SetInt(KEY_BEST_SCORE, _bestScore);
     }
 
     // Update is called once per frame
@@ -102,7 +119,13 @@ public class GameManager : MonoBehaviour
     
     public void PlusScore(int point)
     {
-        _score += (point * _fever);
+        _score += (int)(point * _fever);
+        if(_score > _bestScore)
+        {
+            _bestScore = _score;
+            SaveScore();
+            UI_Manager.I._txt_BestScoreNum.text = _score.ToString();
+        }
         UI_Manager.I._txt_ScoreNum.text = _score.ToString();
 
         //ScoreCheck

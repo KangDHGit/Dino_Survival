@@ -16,6 +16,8 @@ public class UI_Manager : MonoBehaviour
     public Text _txt_ScoreNum;
     public Text _txt_Fever;
     public int _fever_InitSize;
+
+    public Text _txt_BestScoreNum;
     private void Awake()
     {
         I = this;
@@ -44,6 +46,10 @@ public class UI_Manager : MonoBehaviour
         {
             _fever_InitSize = _txt_Fever.fontSize;
             _txt_Fever.gameObject.SetActive(false);
+        }
+        if(transform.Find("Txt_BestScoreNum").TryGetComponent(out _txt_BestScoreNum))
+        {
+            _txt_BestScoreNum.text = GameManager.I._bestScore.ToString();
         }
     }
 
