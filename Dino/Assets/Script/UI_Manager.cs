@@ -51,6 +51,8 @@ public class UI_Manager : MonoBehaviour
         {
             _txt_BestScoreNum.text = GameManager.I._bestScore.ToString();
         }
+
+        //UI_Setting.I.Init();
     }
 
     public IEnumerator TextSizeEffect(Text text, int speed)
