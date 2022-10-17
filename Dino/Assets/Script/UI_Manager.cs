@@ -25,6 +25,7 @@ public class UI_Manager : MonoBehaviour
 
     public void Init()
     {
+        UI_Setting.I.Init();
         _ui_Intro = transform.Find("UI_Intro").gameObject;
         if (_ui_Intro != null)
             _ui_Intro.SetActive(true);
@@ -51,8 +52,6 @@ public class UI_Manager : MonoBehaviour
         {
             _txt_BestScoreNum.text = GameManager.I._bestScore.ToString();
         }
-
-        //UI_Setting.I.Init();
     }
 
     public IEnumerator TextSizeEffect(Text text, int speed)

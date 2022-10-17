@@ -24,4 +24,17 @@ public class UI_Setting : MonoBehaviour
             Debug.Log("_silder_MainBgm Setting Complete");
         }
     }
+
+    public void MoveSilder(GameObject gameObject)
+    {
+        switch (gameObject.name)
+        {
+            case "UI_MainBgm":
+                SoundManager.I._bgm_Intro.volume = _slider_MainBgm.value;
+                SoundManager.I._bgm_Start.volume = _slider_MainBgm.value;
+                break;
+            default:
+                break;
+        }
+    }
 }

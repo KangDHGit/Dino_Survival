@@ -59,10 +59,13 @@ public class FireSet : MonoBehaviour
 
         }
         Debug.Log("Warning Success");
-        if (this != null)
+        if (!GameManager.I._isIntro || !GameManager.I._isGameOver || !GameManager.I._isPause)
         {
-            _obj_Fire.SetActive(true);
-            _col_Fire.enabled = true;
+            if (this != null)
+            {
+                _obj_Fire.SetActive(true);
+                _col_Fire.enabled = true;
+            }
         }
 
         while (!GameManager.I._isIntro || !GameManager.I._isGameOver || !GameManager.I._isPause)
@@ -77,6 +80,7 @@ public class FireSet : MonoBehaviour
             }
             yield return null;
         }
+        _col_Fire.enabled = false;
         yield return null;
     }
 }

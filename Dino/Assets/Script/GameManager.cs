@@ -30,10 +30,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         LoadScore();
+        SoundManager.I.Init();
         UI_Manager.I.Init();
         RockManager.I.Init();
         FireManager.I.Init();
-        SoundManager.I.Init();
 
         _score = 0;
     }
