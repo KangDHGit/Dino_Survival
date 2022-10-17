@@ -16,7 +16,6 @@ public class FireManager : MonoBehaviour
 
     public float _minXpos;
     public float _maxXpos;
-    bool test = true;
     private void Awake()
     {
         I = this;
@@ -50,7 +49,6 @@ public class FireManager : MonoBehaviour
             }
             _random_delay = Random.Range(_minDelay, _maxDelay);
             _nowTime = 0;
-            test = false;
         }
     }
 
