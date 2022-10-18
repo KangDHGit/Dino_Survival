@@ -56,7 +56,6 @@ public class FireSet : MonoBehaviour
                     break;
                 yield return null;
             }
-
         }
         
         if (!GameManager.I._isIntro || !GameManager.I._isGameOver || !GameManager.I._isPause)

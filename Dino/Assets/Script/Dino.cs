@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Dino : MonoBehaviour
 {
-    float _keyHorizontal;       
+    public static Dino I;
+
+    public float _keyHorizontal;       
     Vector3 _moveVec;           
     Quaternion _moveQua;        
     public float _moveSpeed;    
@@ -12,9 +14,19 @@ public class Dino : MonoBehaviour
     public BtnManager _btnMgr;
     Animator _animator;
 
-    void Start()
+    public bool _pushRightBtn = false;
+    public bool _pushLeftBtn = false;
+
+    private void Awake()
+    {
+        I = this;
+    }
+
+    public void Init()
     {
         _animator = GetComponent<Animator>();
+        _pushRightBtn = false;
+        _pushLeftBtn = false;
     }
 
     // Update is called once per frame
@@ -28,15 +40,41 @@ public class Dino : MonoBehaviour
         _animator.enabled = true;
         if (!GameManager.I._isIntro)
         {
-            GetKey();
+            if(Application.platform == RuntimePlatform.WindowsEditor)
+                GetPCKey();
             Move();
             Look();
         }
     }
     
-    void GetKey()
+    void GetPCKey()
     {
+        if(_keyHorizontal > 0)
+            _btnMgr.OnBtnRArrow(true);
+        else if(_keyHorizontal < 0)
+            _btnMgr.OnBtnLArrow(true); 
+        else
+        {
+            _btnMgr.OnBtnRArrow(false);
+            _btnMgr.OnBtnLArrow(false);
+        }
         _keyHorizontal = Input.GetAxisRaw("Horizontal");
+    }
+
+    void GetAndroidKey(bool stat, GameObject objBtn) // true = PushBtn false = NotPushBtn
+    {
+        if(stat)
+        {
+            if (objBtn.gameObject.name == "Btn_Right")
+                _keyHorizontal = 1.0f;
+            else if (objBtn.gameObject.name == "Btn_Left")
+                _keyHorizontal = -1.0f;
+        }
+        else
+        {
+            _keyHorizontal = 0.0f;
+        }
+            
     }
     
     void Move()
@@ -50,20 +88,16 @@ public class Dino : MonoBehaviour
         if (_keyHorizontal > 0)
         {
             _moveQua = new Quaternion();
-            _btnMgr.OnBtnRArrow();
             MoveAnima();
         }
         else if (_keyHorizontal < 0)
         {
             _moveQua = new Quaternion(0, 180, 0, 0);
-            _btnMgr.OnBtnLArrow();
             MoveAnima();
         }
         else
         {
             _moveQua = transform.rotation;
-            _btnMgr.OffBtnLArrow();
-            _btnMgr.OffBtnRArrow();
             StayAnima();
         }
         transform.rotation = _moveQua;

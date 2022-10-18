@@ -20,20 +20,30 @@ public class BtnManager : MonoBehaviour
     {
         
     }
-    public void OnBtnLArrow()
+    public void OnBtnLArrow(bool stat)
     {
-        _BtnLeft.image.sprite = _ChangeSprite;
+        if (stat)
+        {
+            _BtnLeft.image.sprite = _ChangeSprite;
+            Dino.I._keyHorizontal = -1.0f;
+        }
+        else if (!stat)
+        {
+            _BtnLeft.image.sprite = _OriginalSprite;
+            Dino.I._keyHorizontal = 0.0f;
+        }
     }
-    public void OffBtnLArrow()
+    public void OnBtnRArrow(bool stat)
     {
-        _BtnLeft.image.sprite = _OriginalSprite;
-    }
-    public void OnBtnRArrow()
-    {
-        _BtnRigit.image.sprite = _ChangeSprite;
-    }
-    public void OffBtnRArrow()
-    {
-        _BtnRigit.image.sprite = _OriginalSprite;
+        if (stat)
+        {
+            _BtnRigit.image.sprite = _ChangeSprite;
+            Dino.I._keyHorizontal = 1.0f;
+        }
+        else if (!stat)
+        {
+            _BtnRigit.image.sprite = _OriginalSprite;
+            Dino.I._keyHorizontal = 0.0f;
+        }
     }
 }

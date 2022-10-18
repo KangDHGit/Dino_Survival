@@ -8,8 +8,9 @@ public class UI_Setting : MonoBehaviour
     public static UI_Setting I;
 
     public Slider _slider_MainBgm;
-
     public Slider _slider_EffectBgm;
+
+    public GameObject _ui_Exit;
 
     private void Awake()
     {
@@ -23,6 +24,9 @@ public class UI_Setting : MonoBehaviour
             _slider_MainBgm.value = SoundManager.I._mainVolume;
             Debug.Log("_silder_MainBgm Setting Complete");
         }
+        _ui_Exit = transform.Find("UI_Exit").gameObject;
+        if (_ui_Exit != null)
+            _ui_Exit.SetActive(false);
     }
 
     public void MoveSilder(GameObject gameObject)
@@ -38,5 +42,21 @@ public class UI_Setting : MonoBehaviour
         }
     }
 
-    
+    public void OnClickExit()
+    {
+        _ui_Exit.SetActive(true);
+    }
+
+    public void ExitYesOrNo(bool stat)
+    {
+        if(stat)
+        {
+            Debug.Log("ExitGame");
+            _ui_Exit.SetActive(false);
+        }
+        else
+        {
+            _ui_Exit.SetActive(false);
+        }
+    }
 }

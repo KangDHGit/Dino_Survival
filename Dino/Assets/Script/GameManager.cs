@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         LoadScore();
+        Dino.I.Init();
         SoundManager.I.Init();
         UI_Manager.I.Init();
         RockManager.I.Init();

@@ -18,6 +18,7 @@ public class UI_Manager : MonoBehaviour
     public int _fever_InitSize;
 
     public Text _txt_BestScoreNum;
+
     private void Awake()
     {
         I = this;
