@@ -32,10 +32,15 @@ public class FireSet : MonoBehaviour
     public IEnumerator ActiveWarning()
     {
         bool alphaCheck = false;
-        
-        while (!GameManager.I._isIntro || !GameManager.I._isGameOver || !GameManager.I._isPause)
+
+        while (!alphaCheck)
         {
-            if(!alphaCheck)
+            while (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+            {
+                yield return null;
+            }
+
+            if (this != null)
             {
                 Color color = _spr_Warning.color;
                 color.a += (2.0f * Time.deltaTime);
@@ -43,43 +48,71 @@ public class FireSet : MonoBehaviour
 
                 if (color.a >= 1.0f)
                     alphaCheck = true;
+            }
+
+            yield return null;
+        }
+
+        while (alphaCheck)
+        {
+            while (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+            {
                 yield return null;
             }
-            
-            if(alphaCheck)
+
+            if (this != null)
             {
                 Color color = _spr_Warning.color;
                 color.a -= (2.0f * Time.deltaTime);
                 _spr_Warning.color = color;
 
                 if (color.a <= 0)
+                {
+                    Debug.Log("alphaCheck2");
                     break;
-                yield return null;
-            }
-        }
-        
-        if (!GameManager.I._isIntro || !GameManager.I._isGameOver || !GameManager.I._isPause)
-        {
-            if (this != null)
-            {
-                _obj_Fire.SetActive(true);
-                _col_Fire.enabled = true;
-            }
-        }
-
-        while (!GameManager.I._isIntro || !GameManager.I._isGameOver || !GameManager.I._isPause)
-        {
-            if (_anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f && _col_Fire.isActiveAndEnabled)
-                _col_Fire.enabled = false;
-
-            if (_anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
-            {
-                Destroy(this.gameObject);
-                break;
+                }
             }
             yield return null;
         }
-        _col_Fire.enabled = false;
-        yield return null;
+
+        while (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+        {
+            yield return null;
+        }
+
+        if (this != null)
+        {
+            _obj_Fire.SetActive(true);
+            _col_Fire.enabled = true;
+        }
+
+        while (this != null && _anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.7f && _col_Fire.isActiveAndEnabled)
+        {
+            if (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+                _anim_Fire.speed = 0.0f;
+            else
+                _anim_Fire.speed = 1.0f;
+
+            yield return null;
+        }
+
+        if (this != null)
+        {
+            _col_Fire.enabled = false;
+        }
+
+        while (this != null && _anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            if (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+                _anim_Fire.speed = 0.0f;
+            else
+                _anim_Fire.speed = 1.0f;
+
+            yield return null;
+        }
+        if (this != null)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class BtnManager : MonoBehaviour
 {
@@ -10,16 +11,11 @@ public class BtnManager : MonoBehaviour
     public Sprite _ChangeSprite;
     Sprite _OriginalSprite;
 
-    // Start is called before the first frame update
     void Start()
     {
         _OriginalSprite = _BtnLeft.image.sprite;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     public void OnBtnLArrow(bool stat)
     {
         if (stat)

@@ -7,10 +7,10 @@ public class UI_Setting : MonoBehaviour
 {
     public static UI_Setting I;
 
-    public Slider _slider_MainBgm;
-    public Slider _slider_EffectBgm;
+    Slider _slider_MainBgm;
+    Slider _slider_EffectBgm;
 
-    public GameObject _ui_Exit;
+    GameObject _ui_Exit;
 
     private void Awake()
     {

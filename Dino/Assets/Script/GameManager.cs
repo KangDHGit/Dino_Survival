@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
         UI_Manager.I._ui_GameOver.SetActive(false);
         
         RockManager.I.DestroyRocks();
+        FireManager.I.DestroyFireSets();
 
         _score = 0;
         UI_Manager.I._txt_ScoreNum.text = _score.ToString();

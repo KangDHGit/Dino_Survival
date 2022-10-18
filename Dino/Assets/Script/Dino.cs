@@ -11,11 +11,7 @@ public class Dino : MonoBehaviour
     Quaternion _moveQua;        
     public float _moveSpeed;    
 
-    public BtnManager _btnMgr;
     Animator _animator;
-
-    public bool _pushRightBtn = false;
-    public bool _pushLeftBtn = false;
 
     private void Awake()
     {
@@ -25,8 +21,6 @@ public class Dino : MonoBehaviour
     public void Init()
     {
         _animator = GetComponent<Animator>();
-        _pushRightBtn = false;
-        _pushLeftBtn = false;
     }
 
     // Update is called once per frame
@@ -40,7 +34,11 @@ public class Dino : MonoBehaviour
         _animator.enabled = true;
         if (!GameManager.I._isIntro)
         {
-            if(Application.platform == RuntimePlatform.WindowsEditor)
+            if (CheckPlatform_DeskTop())
+                GetPCKey();
+            else if (CheckPlaform_Mobile())
+                _keyHorizontal = UI_Manager.I.LeftValue + UI_Manager.I.RightValue;
+            else
                 GetPCKey();
             Move();
             Look();
@@ -49,16 +47,42 @@ public class Dino : MonoBehaviour
     
     void GetPCKey()
     {
-        if(_keyHorizontal > 0)
-            _btnMgr.OnBtnRArrow(true);
-        else if(_keyHorizontal < 0)
-            _btnMgr.OnBtnLArrow(true); 
+        _keyHorizontal = Input.GetAxisRaw("Horizontal");
+        if (_keyHorizontal > 0)
+            UI_Manager.I.DownTrigger_R(true);
+        else if (_keyHorizontal < 0)
+            UI_Manager.I.DownTrigger_L(true);
         else
         {
-            _btnMgr.OnBtnRArrow(false);
-            _btnMgr.OnBtnLArrow(false);
+            UI_Manager.I.DownTrigger_R(false);
+            UI_Manager.I.DownTrigger_L(false);
         }
-        _keyHorizontal = Input.GetAxisRaw("Horizontal");
+    }
+
+    bool CheckPlatform_DeskTop()
+    {
+        switch (Application.platform)
+        {
+            case RuntimePlatform.OSXEditor:
+            case RuntimePlatform.OSXPlayer:
+            case RuntimePlatform.WindowsPlayer:
+            case RuntimePlatform.WindowsEditor:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    bool CheckPlaform_Mobile()
+    {
+        switch (Application.platform)
+        {
+            case RuntimePlatform.IPhonePlayer:
+            case RuntimePlatform.Android:
+                return true;
+            default:
+                return false;
+        }
     }
 
     void GetAndroidKey(bool stat, GameObject objBtn) // true = PushBtn false = NotPushBtn
