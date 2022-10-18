@@ -86,4 +86,14 @@ public class UI_Manager : MonoBehaviour
         }
         yield return null;
     }
+
+    public void OnClickSetting(bool stat)
+    {
+        if (GameManager.I._isGameOver || GameManager.I._isIntro)
+            _txt_Pause.gameObject.SetActive(false);
+        else
+            _txt_Pause.gameObject.SetActive(true);
+        GameManager.I._isPause = stat;
+        _ui_Pause.gameObject.SetActive(stat);
+    }
 }

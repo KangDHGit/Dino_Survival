@@ -32,7 +32,7 @@ public class FireSet : MonoBehaviour
     public IEnumerator ActiveWarning()
     {
         bool alphaCheck = false;
-        // 일정시간동안 경고스프라이트 켜주기
+        
         while (!GameManager.I._isIntro || !GameManager.I._isGameOver || !GameManager.I._isPause)
         {
             if(!alphaCheck)
@@ -58,7 +58,7 @@ public class FireSet : MonoBehaviour
             }
 
         }
-        Debug.Log("Warning Success");
+        
         if (!GameManager.I._isIntro || !GameManager.I._isGameOver || !GameManager.I._isPause)
         {
             if (this != null)
@@ -70,7 +70,7 @@ public class FireSet : MonoBehaviour
 
         while (!GameManager.I._isIntro || !GameManager.I._isGameOver || !GameManager.I._isPause)
         {
-            if (_anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f && _col_Fire.isActiveAndEnabled)
+            if (_anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f && _col_Fire.isActiveAndEnabled)
                 _col_Fire.enabled = false;
 
             if (_anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
