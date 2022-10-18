@@ -21,8 +21,12 @@ public class UI_Setting : MonoBehaviour
     {
         if (transform.Find("UI_MainBgm/Slider").TryGetComponent(out _slider_MainBgm))
         {
-            _slider_MainBgm.value = SoundManager.I._mainVolume;
+            _slider_MainBgm.value = SoundManager.I._mainVol;
             Debug.Log("_silder_MainBgm Setting Complete");
+        }
+        if(transform.Find("UI_EffectBgm/Slider").TryGetComponent(out _slider_EffectBgm))
+        {
+            _slider_EffectBgm.value = SoundManager.I._effectVol;
         }
         _ui_Exit = transform.Find("UI_Exit").gameObject;
         if (_ui_Exit != null)
@@ -36,6 +40,10 @@ public class UI_Setting : MonoBehaviour
             case "UI_MainBgm":
                 SoundManager.I._bgm_Intro.volume = _slider_MainBgm.value;
                 SoundManager.I._bgm_Start.volume = _slider_MainBgm.value;
+                break;
+            case "UI_EffectBgm":
+                SoundManager.I._sfx_Fire.volume = _slider_EffectBgm.value;
+                SoundManager.I._sfx_Rock.volume = _slider_EffectBgm.value;
                 break;
             default:
                 break;

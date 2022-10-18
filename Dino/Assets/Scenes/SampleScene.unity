@@ -1050,7 +1050,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 673856211}
+        m_TargetAssemblyTypeName: UI_Setting, Assembly-CSharp
+        m_MethodName: MoveSilder
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 829502019}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &296449899
 GameObject:
   m_ObjectHideFlags: 0
@@ -3412,7 +3424,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bgm_Intro: {fileID: 0}
   _bgm_Start: {fileID: 0}
-  _mainVolume: 0
+  _sfx_Rock: {fileID: 0}
+  _sfx_Fire: {fileID: 0}
+  _mainVol: 0
+  _effectVol: 0
 --- !u!1 &873482166
 GameObject:
   m_ObjectHideFlags: 0
