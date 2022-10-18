@@ -45,7 +45,12 @@ public class Rock : MonoBehaviour
         {
             _sprRen.color = new Color(_sprRen.color.r, _sprRen.color.g, _sprRen.color.b, _alpha);
             if (_alpha > 0)
-                _alpha -= 0.5f * Time.deltaTime;
+                _alpha -= 0.75f * Time.deltaTime;
+            else
+            {
+                if (this != null)
+                    Destroy(this.gameObject);
+            }
         }
     }
 
@@ -57,7 +62,6 @@ public class Rock : MonoBehaviour
             _dropSpeed = 0.0f;
             _rotSpeed = 0.0f;
             _onGround = true;
-            Destroy(this.gameObject, 1.0f);
             GameManager.I.PlusScore(10);
             this.GetComponent<Collider2D>().enabled = false;
         }
