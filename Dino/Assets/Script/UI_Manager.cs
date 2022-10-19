@@ -125,12 +125,12 @@ public class UI_Manager : MonoBehaviour
     {
         if (stat)
         {
-            _img_Right.sprite = _push_Sprite;
+            _img_Left.sprite = _push_Sprite;
             _leftValue = -1;
         }
         else
         {
-            _img_Right.sprite = _up_Sprite;
+            _img_Left.sprite = _up_Sprite;
             _leftValue = 0;
         }
     }
@@ -138,12 +138,12 @@ public class UI_Manager : MonoBehaviour
     {
         if (stat)
         {
-            _img_Left.sprite = _push_Sprite;
+            _img_Right.sprite = _push_Sprite;
             _rightValue = 1;
         }
         else
         {
-            _img_Left.sprite = _up_Sprite;
+            _img_Right.sprite = _up_Sprite;
             _rightValue = 0;
         }
     }

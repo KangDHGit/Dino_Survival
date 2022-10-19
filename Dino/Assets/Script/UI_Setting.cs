@@ -60,7 +60,6 @@ public class UI_Setting : MonoBehaviour
     {
         if(stat)
         {
-            Debug.Log("ExitGame");
             _ui_Exit.SetActive(false);
         }
         else

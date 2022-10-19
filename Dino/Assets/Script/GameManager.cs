@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
     {
         if (_isGameOver || _isPause)
             return;
-        //PlusScore();
     }
     
     public void OnClick_GameStart()
