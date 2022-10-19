@@ -60,11 +60,11 @@ public class UI_Setting : MonoBehaviour
     {
         if(stat)
         {
-            _ui_Exit.SetActive(false);
+            Application.Quit();
         }
         else
         {
-            Application.Quit();
+            _ui_Exit.SetActive(false);
         }
     }
 }
