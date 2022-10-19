@@ -85,22 +85,6 @@ public class Dino : MonoBehaviour
         }
     }
 
-    void GetAndroidKey(bool stat, GameObject objBtn) // true = PushBtn false = NotPushBtn
-    {
-        if(stat)
-        {
-            if (objBtn.gameObject.name == "Btn_Right")
-                _keyHorizontal = 1.0f;
-            else if (objBtn.gameObject.name == "Btn_Left")
-                _keyHorizontal = -1.0f;
-        }
-        else
-        {
-            _keyHorizontal = 0.0f;
-        }
-            
-    }
-    
     void Move()
     {
         _moveVec = new Vector3(_keyHorizontal, 0);
