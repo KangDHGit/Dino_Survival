@@ -11,6 +11,8 @@ public class CameraManager : MonoBehaviour
     double _defaultAspectRatio = 1.777777777777778;
     double _currentAspectRatio;
 
+    float _ratioValue; public float RatioValue { get { return _ratioValue; } }
+
     private void Awake()
     {
         I = this;
@@ -20,6 +22,8 @@ public class CameraManager : MonoBehaviour
     {
         _currentAspectRatio = (double)Screen.height / (double)Screen.width;
 
-        _camera.orthographicSize = (float)(_currentAspectRatio / _defaultAspectRatio * 5);
+        _ratioValue = (float)(_currentAspectRatio / _defaultAspectRatio);
+
+        _camera.orthographicSize = _ratioValue * 5;
     }
 }

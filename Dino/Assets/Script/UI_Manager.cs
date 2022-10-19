@@ -76,6 +76,8 @@ public class UI_Manager : MonoBehaviour
             _txt_BestScoreNum.text = GameManager.I._bestScore.ToString();
         else
             Debug.LogError("_txt_BestScoreNum is Null");
+
+        TriggerRePos();
     }
 
     public IEnumerator TextSizeEffect(Text text, int speed)
@@ -167,5 +169,18 @@ public class UI_Manager : MonoBehaviour
             _img_Right.sprite = _up_Sprite;
             _rightValue = 0;
         }
+    }
+
+    public void TriggerRePos()
+    {
+        RectTransform rect_R = _img_Right.gameObject.GetComponent<RectTransform>();
+        Vector2 rePos_R = rect_R.anchoredPosition;
+        rePos_R.x *= CameraManager.I.RatioValue;
+        rect_R.anchoredPosition = rePos_R;
+
+        RectTransform rect_L = _img_Left.gameObject.GetComponent<RectTransform>();
+        Vector2 rePos_L = rect_L.anchoredPosition;
+        rePos_L.x *= CameraManager.I.RatioValue;
+        rect_L.anchoredPosition = rePos_L;
     }
 }
