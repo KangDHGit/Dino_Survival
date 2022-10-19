@@ -64,7 +64,7 @@ public class UI_Setting : MonoBehaviour
         }
         else
         {
-            _ui_Exit.SetActive(false);
+            Application.Quit();
         }
     }
 }

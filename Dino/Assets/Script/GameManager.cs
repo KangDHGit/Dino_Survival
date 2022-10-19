@@ -57,8 +57,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_isGameOver || _isPause)
-            return;
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!_isPause)
+                UI_Manager.I.OnClickSetting(true);
+            else if(UI_Manager.I._ui_Pause.gameObject.activeSelf)
+                    UI_Setting.I.OnClickExit();
+        }
     }
     
     public void OnClick_GameStart()
@@ -80,12 +85,6 @@ public class GameManager : MonoBehaviour
         SoundManager.I._bgm_Start.Play();
     }
     
-    public void OnClick_Pause()
-    {
-        _isPause = true;
-        UI_Manager.I._ui_Pause.SetActive(true);
-        Invoke("FlasingTxtPause", 1.0f);
-    }
     public void OnClick_PauseReStart()
     {
         _isPause = false;
@@ -93,26 +92,6 @@ public class GameManager : MonoBehaviour
         _score = 0;
         UI_Manager.I._txt_ScoreNum.text = _score.ToString();
     }
-    
-    void FlasingTxtPause()
-    {
-        if (_isPause == false)
-            return;
-        if(_isTxtPauseOn == false)
-        {
-            _isTxtPauseOn = true;
-            UI_Manager.I._txt_Pause.enabled = false;
-            Invoke("FlasingTxtPause", 1.0f);
-        }
-        else if(_isTxtPauseOn == true)
-        {
-            _isTxtPauseOn = false;
-            UI_Manager.I._txt_Pause.enabled = true;
-            Invoke("FlasingTxtPause", 1.0f);
-        }
-        return;
-    }
-
     
     public void On_GameOver()
     {

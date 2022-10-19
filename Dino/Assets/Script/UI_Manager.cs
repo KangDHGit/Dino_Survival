@@ -113,13 +113,34 @@ public class UI_Manager : MonoBehaviour
 
     public void OnClickSetting(bool stat)
     {
+        GameManager.I._isPause = stat;
         if (GameManager.I._isGameOver || GameManager.I._isIntro)
             _txt_Pause.gameObject.SetActive(false);
         else
-            _txt_Pause.gameObject.SetActive(true);
-        GameManager.I._isPause = stat;
+            Invoke("FlasingTxtPause", 1.0f);
+
         _ui_Pause.gameObject.SetActive(stat);
     }
+
+    void FlasingTxtPause()
+    {
+        if (GameManager.I._isPause == false)
+            return;
+        if (_isTxtPauseOn == false)
+        {
+            _isTxtPauseOn = true;
+            _txt_Pause.enabled = false;
+            Invoke("FlasingTxtPause", 1.0f);
+        }
+        else if (_isTxtPauseOn == true)
+        {
+            _isTxtPauseOn = false;
+            _txt_Pause.enabled = true;
+            Invoke("FlasingTxtPause", 1.0f);
+        }
+        return;
+    }
+
 
     public void DownTrigger_L(bool stat) // true = Down , false = Up
     {
