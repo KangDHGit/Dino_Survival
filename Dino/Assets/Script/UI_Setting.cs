@@ -48,6 +48,7 @@ public class UI_Setting : MonoBehaviour
             default:
                 break;
         }
+        SoundManager.I.SaveVolLevel(_slider_MainBgm.value, _slider_EffectBgm.value);
     }
 
     public void OnClickExit()

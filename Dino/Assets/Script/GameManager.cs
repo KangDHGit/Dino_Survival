@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         RockManager.I.Init();
         FireManager.I.Init();
         Dino.I.Init();
+        UI_Setting.I.Init();
         SoundManager.I.Init();
         UI_Manager.I.Init();
         FireManager.I.Init();
