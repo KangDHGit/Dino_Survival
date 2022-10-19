@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        CameraManager.I.Init();
         LoadScore();
         RockManager.I.Init();
         FireManager.I.Init();
