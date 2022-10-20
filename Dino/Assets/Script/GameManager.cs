@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
     {
         _isIntro = false;
         _isGameOver = false;
+        _isPause = false;
 
         UI_Manager.I._ui_Intro.SetActive(false);
         UI_Manager.I._ui_Start.SetActive(true);
@@ -84,14 +85,6 @@ public class GameManager : MonoBehaviour
 
         SoundManager.I._bgm_Intro.Stop();
         SoundManager.I._bgm_Start.Play();
-    }
-    
-    public void OnClick_PauseReStart()
-    {
-        _isPause = false;
-        UI_Manager.I._ui_Pause.SetActive(false);
-        _score = 0;
-        UI_Manager.I._txt_ScoreNum.text = _score.ToString();
     }
     
     public void On_GameOver()

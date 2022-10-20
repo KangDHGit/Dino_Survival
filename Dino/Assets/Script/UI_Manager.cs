@@ -119,7 +119,10 @@ public class UI_Manager : MonoBehaviour
         if (GameManager.I._isGameOver || GameManager.I._isIntro)
             _txt_Pause.gameObject.SetActive(false);
         else
+        {
+            _txt_Pause.gameObject.SetActive(true);
             Invoke("FlasingTxtPause", 1.0f);
+        }
 
         _ui_Pause.gameObject.SetActive(stat);
     }
