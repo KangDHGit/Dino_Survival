@@ -68,7 +68,6 @@ public class FireSet : MonoBehaviour
 
                 if (color.a <= 0)
                 {
-                    Debug.Log("alphaCheck2");
                     break;
                 }
             }

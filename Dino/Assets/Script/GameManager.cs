@@ -119,8 +119,6 @@ public class GameManager : MonoBehaviour
             RockManager.I._rockTemplate.GetComponent<Rock>()._dropSpeed++;
             if(RockManager.I._maxDelay > RockManager.I._minDelay)
                 RockManager.I._maxDelay -= 0.05f;
-
-            Debug.Log("ScoreCheck Success");
         }
     }
 
