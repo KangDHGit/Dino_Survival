@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        PcScreen();
         CameraManager.I.Init();
         LoadScore();
         RockManager.I.Init();
@@ -129,5 +130,11 @@ public class GameManager : MonoBehaviour
         RockManager.I._maxDelay = 0.75f;
         _fever = 1;
         _nextFeverScore = 200;
+    }
+
+    public void PcScreen()
+    {
+        if (Dino.I.CheckPlatform_DeskTop())
+            Screen.SetResolution(472, 972, false);
     }
 }

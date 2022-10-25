@@ -59,7 +59,7 @@ public class Dino : MonoBehaviour
         }
     }
 
-    bool CheckPlatform_DeskTop()
+    public bool CheckPlatform_DeskTop()
     {
         switch (Application.platform)
         {
