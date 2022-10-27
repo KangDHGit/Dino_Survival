@@ -21,6 +21,7 @@ public class Dino : MonoBehaviour
     public void Init()
     {
         _animator = GetComponent<Animator>();
+        moveSpeedInit();
     }
 
     // Update is called once per frame
@@ -125,5 +126,14 @@ public class Dino : MonoBehaviour
             GameManager.I.On_GameOver();
             GameManager.I.FeverInit();
         }
+    }
+    public void moveSpeedUp()
+    {
+        _moveSpeed += 0.2f;
+    }
+
+    public void moveSpeedInit()
+    {
+        _moveSpeed = 3.0f;
     }
 }

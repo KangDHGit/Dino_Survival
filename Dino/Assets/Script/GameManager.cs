@@ -119,6 +119,7 @@ public class GameManager : MonoBehaviour
 
             RockManager.I.DifficultyUp();
             FireManager.I.DifficultyUp();
+            Dino.I.moveSpeedUp();
         }
     }
 
@@ -127,6 +128,7 @@ public class GameManager : MonoBehaviour
         UI_Manager.I._txt_Fever.gameObject.SetActive(false);
         RockManager.I.DifficultyInit();
         FireManager.I.DifficultyInit();
+        Dino.I.moveSpeedInit();
         _fever = 1;
         _nextFeverScore = 200;
     }
