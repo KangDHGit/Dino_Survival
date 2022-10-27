@@ -117,9 +117,8 @@ public class GameManager : MonoBehaviour
             UI_Manager.I._txt_Fever.text = "FEVER " + String.Format($"{_fever : 0.0}");
             _nextFeverScore *= 2;
 
-            RockManager.I._rockTemplate.GetComponent<Rock>()._dropSpeed++;
-            if(RockManager.I._maxDelay > RockManager.I._minDelay)
-                RockManager.I._maxDelay -= 0.05f;
+            RockManager.I.DifficultyUp();
+            FireManager.I.DifficultyUp();
         }
     }
 
@@ -127,6 +126,7 @@ public class GameManager : MonoBehaviour
     {
         UI_Manager.I._txt_Fever.gameObject.SetActive(false);
         RockManager.I.DifficultyInit();
+        FireManager.I.DifficultyInit();
         _fever = 1;
         _nextFeverScore = 200;
     }

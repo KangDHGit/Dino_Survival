@@ -32,6 +32,7 @@ public class RockManager : MonoBehaviour
             _rockTemplate.SetActive(false);
         _templatePos = _rockTemplate.transform.position;
         _list_Obj_rock = new List<GameObject>();
+        DifficultyInit();
     }
 
     private void Update()
@@ -67,12 +68,14 @@ public class RockManager : MonoBehaviour
 
     public void DifficultyInit()
     {
-        _minDelay = 0.4f;
-        _minDelay = 0.8f;
-        _rockTemplate.GetComponent<Rock>()._dropSpeed = 4;
+        _minDelay = 0.5f;
+        _maxDelay = 1.2f;
+        _rockTemplate.GetComponent<Rock>()._dropSpeed = 3.5f;
     }
     public void DifficultyUp()
     {
-
+        if (_maxDelay > _minDelay)
+            _maxDelay -= 0.05f;
+        _rockTemplate.GetComponent<Rock>()._dropSpeed += 0.5f;
     }
 }

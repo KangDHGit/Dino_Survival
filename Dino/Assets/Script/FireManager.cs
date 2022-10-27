@@ -27,6 +27,7 @@ public class FireManager : MonoBehaviour
         if (_fireTemplate != null)
             _fireTemplate.SetActive(false);
         _list_Obj_FireSet = new List<GameObject>();
+        DifficultyInit();
     }
 
     private void Update()
@@ -62,5 +63,16 @@ public class FireManager : MonoBehaviour
             }
             _list_Obj_FireSet.Clear();
         }
+    }
+
+    public void DifficultyInit()
+    {
+        _minDelay = 0.7f;
+        _maxDelay = 1.3f;
+    }
+    public void DifficultyUp()
+    {
+        if(_maxDelay > _minDelay)
+            _maxDelay -= 0.05f;
     }
 }
