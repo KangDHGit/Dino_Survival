@@ -64,4 +64,15 @@ public class RockManager : MonoBehaviour
         }
         _list_Obj_rock.Clear();
     }
+
+    public void DifficultyInit()
+    {
+        _minDelay = 0.4f;
+        _minDelay = 0.8f;
+        _rockTemplate.GetComponent<Rock>()._dropSpeed = 4;
+    }
+    public void DifficultyUp()
+    {
+
+    }
 }

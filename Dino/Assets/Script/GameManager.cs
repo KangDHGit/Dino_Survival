@@ -126,8 +126,7 @@ public class GameManager : MonoBehaviour
     public void FeverInit()
     {
         UI_Manager.I._txt_Fever.gameObject.SetActive(false);
-        RockManager.I._rockTemplate.GetComponent<Rock>()._dropSpeed = 4;
-        RockManager.I._maxDelay = 0.75f;
+        RockManager.I.DifficultyInit();
         _fever = 1;
         _nextFeverScore = 200;
     }
