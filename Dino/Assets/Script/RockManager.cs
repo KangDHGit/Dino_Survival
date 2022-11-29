@@ -16,9 +16,8 @@ public class RockManager : MonoBehaviour
 
     [SerializeField] float _minXpos;
     [SerializeField] float _maxXpos;
-    
-    //public List<Rock> _rocks;
-    public List<GameObject> _list_Obj_rock;
+
+    [SerializeField] List<GameObject> _list_Obj_rock;
 
     public void Awake()
     {

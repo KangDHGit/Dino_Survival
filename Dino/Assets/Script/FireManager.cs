@@ -7,7 +7,7 @@ public class FireManager : MonoBehaviour
     public static FireManager I;
 
     public GameObject _fireTemplate;
-    public List<GameObject> _list_Obj_FireSet;
+    [SerializeField] List<GameObject> _list_Obj_FireSet;
 
     float _nowTime;
     float _random_delay = 0;
