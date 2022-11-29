@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     const string KEY_BEST_SCORE = "user_data_best_score";
 
+    bool _platform = false; public bool Platform { get { return _platform; } } // true : pc or other, false : mobile
+
     private void Awake()
     {
         I = this;
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        CheckPlatform();
         PcScreen();
         CameraManager.I.Init();
         LoadScore();
@@ -41,6 +44,53 @@ public class GameManager : MonoBehaviour
         FireManager.I.Init();
 
         _score = 0;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!_isPause)
+                UI_Manager.I.OnClickSetting(true);
+            else if (UI_Manager.I._ui_Pause.gameObject.activeSelf)
+                UI_Setting.I.OnClickExit();
+        }
+    }
+
+    void CheckPlatform()
+    {
+        if (CheckPlatform_DeskTop())
+            _platform = true;
+        else if (CheckPlaform_Mobile())
+            _platform = false;
+        else
+            _platform = true;
+    }
+
+    bool CheckPlatform_DeskTop()
+    {
+        switch (Application.platform)
+        {
+            case RuntimePlatform.OSXEditor:
+            case RuntimePlatform.OSXPlayer:
+            case RuntimePlatform.WindowsPlayer:
+            case RuntimePlatform.WindowsEditor:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    bool CheckPlaform_Mobile()
+    {
+        switch (Application.platform)
+        {
+            case RuntimePlatform.IPhonePlayer:
+            case RuntimePlatform.Android:
+                return true;
+            default:
+                return false;
+        }
     }
 
     public void LoadScore()
@@ -56,18 +106,6 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt(KEY_BEST_SCORE, _bestScore);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!_isPause)
-                UI_Manager.I.OnClickSetting(true);
-            else if(UI_Manager.I._ui_Pause.gameObject.activeSelf)
-                    UI_Setting.I.OnClickExit();
-        }
-    }
-    
     public void OnClick_GameStart()
     {
         _isIntro = false;
@@ -135,7 +173,7 @@ public class GameManager : MonoBehaviour
 
     public void PcScreen()
     {
-        if (Dino.I.CheckPlatform_DeskTop())
+        if (CheckPlatform_DeskTop())
             Screen.SetResolution(472, 972, false);
     }
 }

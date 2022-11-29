@@ -35,12 +35,10 @@ public class Dino : MonoBehaviour
         _animator.enabled = true;
         if (!GameManager.I._isIntro)
         {
-            if (CheckPlatform_DeskTop())
+            if (GameManager.I.Platform)
                 GetPCKey();
-            else if (CheckPlaform_Mobile())
+            else 
                 _keyHorizontal = UI_Manager.I.LeftValue + UI_Manager.I.RightValue;
-            else
-                GetPCKey();
             Move();
             Look();
         }
@@ -57,32 +55,6 @@ public class Dino : MonoBehaviour
         {
             UI_Manager.I.DownTrigger_R(false);
             UI_Manager.I.DownTrigger_L(false);
-        }
-    }
-
-    public bool CheckPlatform_DeskTop()
-    {
-        switch (Application.platform)
-        {
-            case RuntimePlatform.OSXEditor:
-            case RuntimePlatform.OSXPlayer:
-            case RuntimePlatform.WindowsPlayer:
-            case RuntimePlatform.WindowsEditor:
-                return true;
-            default:
-                return false;
-        }
-    }
-
-    bool CheckPlaform_Mobile()
-    {
-        switch (Application.platform)
-        {
-            case RuntimePlatform.IPhonePlayer:
-            case RuntimePlatform.Android:
-                return true;
-            default:
-                return false;
         }
     }
 
