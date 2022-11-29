@@ -62,7 +62,10 @@ public class GameManager : MonoBehaviour
         if (CheckPlatform_DeskTop())
             _platform = true;
         else if (CheckPlaform_Mobile())
+        {
             _platform = false;
+            Application.targetFrameRate = 60;
+        }
         else
             _platform = true;
     }
