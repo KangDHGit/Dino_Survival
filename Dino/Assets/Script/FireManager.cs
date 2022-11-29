@@ -11,11 +11,11 @@ public class FireManager : MonoBehaviour
 
     float _nowTime;
     float _random_delay = 0;
-    public float _minDelay;
-    public float _maxDelay;
+    [SerializeField] float _minDelay;
+    [SerializeField] float _maxDelay;
 
-    public float _minXpos;
-    public float _maxXpos;
+    [SerializeField] float _minXpos;
+    [SerializeField] float _maxXpos;
     private void Awake()
     {
         I = this;
