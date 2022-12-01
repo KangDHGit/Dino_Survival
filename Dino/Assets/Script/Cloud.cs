@@ -14,7 +14,7 @@ public class Cloud : MonoBehaviour
     }
     void MoveCloud()
     {
-        if (GameManager.I._isGameOver == true)
+        if (GameManager.I.IsGameOver)
             return;
         transform.Translate(new Vector3(-_moveSpeed * Time.deltaTime, 0));
         if(transform.position.x <= _xposLimit)

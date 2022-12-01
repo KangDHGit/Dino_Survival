@@ -9,16 +9,16 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager I;
 
-    public bool _isIntro = true;
-    public bool _isGameOver = false;
-    public bool _isPause = false;
-    
+    bool _isIntro = true; public bool IsIntro { get { return _isIntro; } }
+    bool _isGameOver = false; public bool IsGameOver { get { return _isGameOver; } }
+    bool _isPause = false; public bool IsPause { get { return _isPause; } set { _isPause = value; } }
+
     public bool _isTxtPauseOn = false;
 
     double _nextFeverScore = 200;
-    public float _fever = 1;
+    [SerializeField] float _fever = 1;
     int _score = 0;
-    public int _bestScore;
+    int _bestScore; public int BestScore { get { return _bestScore; } }
 
     const string KEY_BEST_SCORE = "user_data_best_score";
 
@@ -31,16 +31,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        CheckPlatform();
-        PcScreen();
+        SetPlatform();
+        SetPcScreen();
         CameraManager.I.Init();
         LoadScore();
         RockManager.I.Init();
         FireManager.I.Init();
         Dino.I.Init();
-        UI_Setting.I.Init();
+        UISetting.I.Init();
         SoundManager.I.Init();
-        UI_Manager.I.Init();
+        UIManager.I.Init();
         FireManager.I.Init();
 
         _score = 0;
@@ -51,13 +51,13 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!_isPause)
-                UI_Manager.I.OnClickSetting(true);
-            else if (UI_Manager.I._ui_Pause.gameObject.activeSelf)
-                UI_Setting.I.OnClickExit();
+                UIManager.I.OnClickSetting(true);
+            else if (UIManager.I._ui_Pause.gameObject.activeSelf)
+                UISetting.I.OnClickExit();
         }
     }
 
-    void CheckPlatform()
+    void SetPlatform()
     {
         if (CheckPlatform_DeskTop())
             _platform = true;
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void LoadScore()
+    void LoadScore()
     {
         if (PlayerPrefs.HasKey(KEY_BEST_SCORE))
             _bestScore = PlayerPrefs.GetInt(KEY_BEST_SCORE);
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
             _bestScore = 0;
     }
 
-    public void SaveScore()
+    void SaveScore()
     {
         PlayerPrefs.SetInt(KEY_BEST_SCORE, _bestScore);
     }
@@ -115,24 +115,24 @@ public class GameManager : MonoBehaviour
         _isGameOver = false;
         _isPause = false;
 
-        UI_Manager.I._ui_Intro.SetActive(false);
-        UI_Manager.I._ui_Start.SetActive(true);
-        UI_Manager.I._ui_GameOver.SetActive(false);
+        UIManager.I._ui_Intro.SetActive(false);
+        UIManager.I._ui_Start.SetActive(true);
+        UIManager.I._ui_GameOver.SetActive(false);
         
-        RockManager.I.DestroyRocks();
-        FireManager.I.DestroyFireSets();
+        RockManager.I.DestroyObstacles();
+        FireManager.I.DestroyObstacles();
 
         _score = 0;
-        UI_Manager.I._txt_ScoreNum.text = _score.ToString();
+        UIManager.I._txt_ScoreNum.text = _score.ToString();
 
-        SoundManager.I._bgm_Intro.Stop();
-        SoundManager.I._bgm_Start.Play();
+        SoundManager.I._bgmIntro.Stop();
+        SoundManager.I._bgmStart.Play();
     }
     
-    public void On_GameOver()
+    public void OnGameOver()
     {
         _isGameOver = true;
-        UI_Manager.I._ui_GameOver.SetActive(true);
+        UIManager.I._ui_GameOver.SetActive(true);
     }
     
     public void PlusScore(int point)
@@ -142,39 +142,39 @@ public class GameManager : MonoBehaviour
         {
             _bestScore = _score;
             SaveScore();
-            UI_Manager.I._txt_BestScoreNum.text = _score.ToString();
+            UIManager.I._txt_BestScoreNum.text = _score.ToString();
         }
-        UI_Manager.I._txt_ScoreNum.text = _score.ToString();
+        UIManager.I._txt_ScoreNum.text = _score.ToString();
 
         //ScoreCheck
         if(_score >= _nextFeverScore)
         {
             _fever += 0.5f;
-            if (!UI_Manager.I._txt_Fever.gameObject.activeSelf)
+            if (!UIManager.I._txt_Fever.gameObject.activeSelf)
             {
-                UI_Manager.I._txt_Fever.gameObject.SetActive(true);
-                StartCoroutine(UI_Manager.I.TextSizeEffect(UI_Manager.I._txt_Fever, 1));
+                UIManager.I._txt_Fever.gameObject.SetActive(true);
+                StartCoroutine(UIManager.I.TextSizeEffect(UIManager.I._txt_Fever, 1));
             }
-            UI_Manager.I._txt_Fever.text = "FEVER " + String.Format($"{_fever : 0.0}");
+            UIManager.I._txt_Fever.text = "FEVER " + String.Format($"{_fever : 0.0}");
             _nextFeverScore *= 2;
 
             RockManager.I.DifficultyUp();
             FireManager.I.DifficultyUp();
-            Dino.I.moveSpeedUp();
+            Dino.I.MoveSpeedUp();
         }
     }
 
     public void FeverInit()
     {
-        UI_Manager.I._txt_Fever.gameObject.SetActive(false);
+        UIManager.I._txt_Fever.gameObject.SetActive(false);
         RockManager.I.DifficultyInit();
         FireManager.I.DifficultyInit();
-        Dino.I.moveSpeedInit();
+        Dino.I.MoveSpeedInit();
         _fever = 1;
         _nextFeverScore = 200;
     }
 
-    public void PcScreen()
+    void SetPcScreen()
     {
         if (CheckPlatform_DeskTop())
             Screen.SetResolution(472, 972, false);

@@ -6,10 +6,10 @@ public class Dino : MonoBehaviour
 {
     public static Dino I;
 
-    public float _keyHorizontal;       
+    public float _horizontal;       
     Vector3 _moveVec;           
     Quaternion _moveQua;        
-    public float _moveSpeed;    
+    float _moveSpeed;    
 
     Animator _animator;
 
@@ -21,57 +21,57 @@ public class Dino : MonoBehaviour
     public void Init()
     {
         _animator = GetComponent<Animator>();
-        moveSpeedInit();
+        MoveSpeedInit();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.I._isGameOver == true || GameManager.I._isPause)
+        if (GameManager.I.IsGameOver || GameManager.I.IsPause)
         {
             _animator.enabled = false;
             return;
         }
         _animator.enabled = true;
-        if (!GameManager.I._isIntro)
+        if (!GameManager.I.IsIntro)
         {
             if (GameManager.I.Platform)
-                GetPCKey();
+                GetPcKey();
             else 
-                _keyHorizontal = UI_Manager.I.LeftValue + UI_Manager.I.RightValue;
+                _horizontal = UIManager.I.LBtnValue + UIManager.I.RBtnValue;
             Move();
             Look();
         }
     }
     
-    void GetPCKey()
+    void GetPcKey()
     {
-        _keyHorizontal = Input.GetAxisRaw("Horizontal");
-        if (_keyHorizontal > 0)
-            UI_Manager.I.DownTrigger_R(true);
-        else if (_keyHorizontal < 0)
-            UI_Manager.I.DownTrigger_L(true);
+        _horizontal = Input.GetAxisRaw("Horizontal");
+        if (_horizontal > 0)
+            UIManager.I.DownTrigger_R(true);
+        else if (_horizontal < 0)
+            UIManager.I.DownTrigger_L(true);
         else
         {
-            UI_Manager.I.DownTrigger_R(false);
-            UI_Manager.I.DownTrigger_L(false);
+            UIManager.I.DownTrigger_R(false);
+            UIManager.I.DownTrigger_L(false);
         }
     }
 
     void Move()
     {
-        _moveVec = new Vector3(_keyHorizontal, 0);
+        _moveVec = new Vector3(_horizontal, 0);
         transform.position += _moveVec * _moveSpeed * Time.deltaTime;
     }
     
     void Look()
     {
-        if (_keyHorizontal > 0)
+        if (_horizontal > 0)
         {
             _moveQua = new Quaternion();
             MoveAnima();
         }
-        else if (_keyHorizontal < 0)
+        else if (_horizontal < 0)
         {
             _moveQua = new Quaternion(0, 180, 0, 0);
             MoveAnima();
@@ -95,16 +95,16 @@ public class Dino : MonoBehaviour
     {
         if(collision.tag == "Obstacle")
         {
-            GameManager.I.On_GameOver();
+            GameManager.I.OnGameOver();
             GameManager.I.FeverInit();
         }
     }
-    public void moveSpeedUp()
+    public void MoveSpeedUp()
     {
         _moveSpeed += 0.2f;
     }
 
-    public void moveSpeedInit()
+    public void MoveSpeedInit()
     {
         _moveSpeed = 3.0f;
     }

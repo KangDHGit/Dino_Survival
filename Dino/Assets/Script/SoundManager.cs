@@ -5,10 +5,10 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager I;
-    public AudioSource _bgm_Intro;
-    public AudioSource _bgm_Start;
-    public AudioSource _sfx_Rock;
-    public AudioSource _sfx_Fire;
+    public AudioSource _bgmIntro;
+    public AudioSource _bgmStart;
+    public AudioSource _sfxRock;
+    public AudioSource _sfxFire;
 
     float _initMainVol = 0.6f;
     public float _mainVol;
@@ -26,25 +26,25 @@ public class SoundManager : MonoBehaviour
     public void Init()
     {
         LoadVolLevel();
-        if (!transform.Find("Bgm_Intro").TryGetComponent(out _bgm_Intro))
+        if (!transform.Find("Bgm_Intro").TryGetComponent(out _bgmIntro))
             Debug.LogError("_bgm_Intro is Null");
         else
-            _bgm_Intro.volume = _mainVol;
+            _bgmIntro.volume = _mainVol;
 
-        if (!transform.Find("Bgm_Start").TryGetComponent(out _bgm_Start))
+        if (!transform.Find("Bgm_Start").TryGetComponent(out _bgmStart))
             Debug.LogError("_bgm_Start is Null");
         else
-            _bgm_Start.volume = _mainVol;
+            _bgmStart.volume = _mainVol;
 
-        if (!RockManager.I._rockTemplate.TryGetComponent(out _sfx_Rock))
+        if (!RockManager.I._obstacleTemplate.TryGetComponent(out _sfxRock))
             Debug.LogError("_sfx_Rock is Null");
         else
-            _sfx_Rock.volume = _effectVol;
+            _sfxRock.volume = _effectVol;
 
-        if (!FireManager.I._fireTemplate.transform.Find("Fire").TryGetComponent(out _sfx_Fire))
+        if (!FireManager.I._obstacleTemplate.transform.Find("Fire").TryGetComponent(out _sfxFire))
             Debug.LogError("_sfx_Fire");
         else
-            _sfx_Fire.volume = _effectVol;
+            _sfxFire.volume = _effectVol;
     }
 
     public void LoadVolLevel()

@@ -2,22 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RockManager : MonoBehaviour
+public class RockManager : ObstacleManager
 {
     public static RockManager I;
 
-    public GameObject _rockTemplate;
     Vector3 _templatePos;
-
-    float _nowTime;
-    float _random_delay = 0;
-    [SerializeField] float _minDelay;
-    [SerializeField] float _maxDelay;
-
-    [SerializeField] float _minXpos;
-    [SerializeField] float _maxXpos;
-
-    [SerializeField] List<GameObject> _list_Obj_rock;
 
     public void Awake()
     {
@@ -26,55 +15,58 @@ public class RockManager : MonoBehaviour
 
     public void Init()
     {
-        _rockTemplate = transform.Find("Rock").gameObject;
-        if(_rockTemplate != null)
-            _rockTemplate.SetActive(false);
-        _templatePos = _rockTemplate.transform.position;
-        _list_Obj_rock = new List<GameObject>();
+        _obstacleTemplate = transform.Find("Rock").gameObject;
+        if(_obstacleTemplate != null)
+            _obstacleTemplate.SetActive(false);
+        _templatePos = _obstacleTemplate.transform.position;
+        _list_Obj_Obstacle = new List<GameObject>();
         DifficultyInit();
     }
 
     private void Update()
     {
-        if (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+        if (GameManager.I.IsIntro || GameManager.I.IsGameOver || GameManager.I.IsPause)
             return;
 
         _nowTime += Time.deltaTime;
-        if(_nowTime >= _random_delay)
+        if(_nowTime >= _randomDelay)
         {
-            GameObject cloneObj = Instantiate(_rockTemplate, this.transform);
+            GameObject cloneObj = Instantiate(_obstacleTemplate, this.transform);
             Rock cloneRock = cloneObj.GetComponent<Rock>();
             cloneRock.Init();
-            _list_Obj_rock.Add(cloneRock.gameObject);
+            _list_Obj_Obstacle.Add(cloneRock.gameObject);
 
             float xPos = Random.Range(_minXpos, _maxXpos);
             cloneObj.transform.position = new Vector3(xPos, _templatePos.y, 0);
 
             cloneObj.SetActive(true);
 
-            _random_delay = Random.Range(_minDelay, _maxDelay);
+            _randomDelay = Random.Range(_minDelay, _maxDelay);
             _nowTime = 0;
         }
     }
-    public void DestroyRocks()
+    public override void DestroyObstacles()
     {
-        for (int i = 0; i < _list_Obj_rock.Count; i++)
+        if (_list_Obj_Obstacle != null)
         {
-            Destroy(_list_Obj_rock[i]);
+            foreach (GameObject obj_Rock in _list_Obj_Obstacle)
+            {
+                Destroy(obj_Rock);
+            }
+            _list_Obj_Obstacle.Clear();
         }
-        _list_Obj_rock.Clear();
     }
 
-    public void DifficultyInit()
+    public override void DifficultyInit()
     {
         _minDelay = 0.5f;
         _maxDelay = 1.2f;
-        _rockTemplate.GetComponent<Rock>()._dropSpeed = 3.5f;
+        _obstacleTemplate.GetComponent<Rock>()._dropSpeed = 3.5f;
     }
-    public void DifficultyUp()
+    public override void DifficultyUp()
     {
         if (_maxDelay > _minDelay)
             _maxDelay -= 0.05f;
-        _rockTemplate.GetComponent<Rock>()._dropSpeed += 0.5f;
+        _obstacleTemplate.GetComponent<Rock>()._dropSpeed += 0.5f;
     }
 }

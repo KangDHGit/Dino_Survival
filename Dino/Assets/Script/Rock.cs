@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour
 {
-    public float _dropSpeed;        
-    public float _rotSpeed;         
+    public float _dropSpeed;
+    [SerializeField] float _rotSpeed;         
     float _rockRot;                 
-    public bool _onGround = false;  
+    bool _onGround = false;  
     float _alpha = 1.0f;            
 
     SpriteRenderer _sprRen;
-    AudioSource _landaudio;
+    AudioSource _landAudio;
 
     public void Init()
     {
         _sprRen = GetComponent<SpriteRenderer>();
-        _landaudio = GetComponent<AudioSource>();
+        _landAudio = GetComponent<AudioSource>();
     }
     void Update()
     {
-        if (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+        if (GameManager.I.IsIntro || GameManager.I.IsGameOver || GameManager.I.IsPause)
             return;
         Drop();
         Rotation();
@@ -58,7 +58,7 @@ public class Rock : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            _landaudio.Play();
+            _landAudio.Play();
             _dropSpeed = 0.0f;
             _rotSpeed = 0.0f;
             _onGround = true;

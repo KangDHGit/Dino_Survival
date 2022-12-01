@@ -35,7 +35,7 @@ public class FireSet : MonoBehaviour
 
         while (!alphaCheck)
         {
-            while (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+            while (GameManager.I.IsIntro || GameManager.I.IsGameOver || GameManager.I.IsPause)
             {
                 yield return null;
             }
@@ -55,7 +55,7 @@ public class FireSet : MonoBehaviour
 
         while (alphaCheck)
         {
-            while (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+            while (GameManager.I.IsIntro || GameManager.I.IsGameOver || GameManager.I.IsPause)
             {
                 yield return null;
             }
@@ -74,7 +74,7 @@ public class FireSet : MonoBehaviour
             yield return null;
         }
 
-        while (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+        while (GameManager.I.IsIntro || GameManager.I.IsGameOver || GameManager.I.IsPause)
         {
             yield return null;
         }
@@ -87,7 +87,7 @@ public class FireSet : MonoBehaviour
 
         while (this != null && _anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.7f && _col_Fire.isActiveAndEnabled)
         {
-            if (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+            if (GameManager.I.IsIntro || GameManager.I.IsGameOver || GameManager.I.IsPause)
                 _anim_Fire.speed = 0.0f;
             else
                 _anim_Fire.speed = 1.0f;
@@ -102,7 +102,7 @@ public class FireSet : MonoBehaviour
 
         while (this != null && _anim_Fire.GetCurrentAnimatorStateInfo(0).IsName("Fire") && _anim_Fire.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
         {
-            if (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+            if (GameManager.I.IsIntro || GameManager.I.IsGameOver || GameManager.I.IsPause)
                 _anim_Fire.speed = 0.0f;
             else
                 _anim_Fire.speed = 1.0f;

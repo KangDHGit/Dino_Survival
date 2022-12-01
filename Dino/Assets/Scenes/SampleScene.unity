@@ -1367,12 +1367,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16a7b9d87a125348a28938fc9d902be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireTemplate: {fileID: 0}
-  _list_Obj_FireSet: []
-  _minDelay: 0.7
-  _maxDelay: 1.1
-  _minXpos: 2.62
-  _maxXpos: -2.62
+  _obstacleTemplate: {fileID: 0}
+  _list_Obj_Obstacle: []
+  _minDelay: 0
+  _maxDelay: 0
+  _minXpos: -2.45
+  _maxXpos: 2.45
 --- !u!1 &375114214
 GameObject:
   m_ObjectHideFlags: 0
@@ -2816,7 +2816,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 673856209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f821eb1b06f48fc49bb9e0ca7002eb57, type: 3}
+  m_Script: {fileID: 11500000, guid: 915f0e29808df5e4ab264c00b887479c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &709560759
@@ -3416,10 +3416,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea6ffcb917abfc478c815d2a94a7630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bgm_Intro: {fileID: 0}
-  _bgm_Start: {fileID: 0}
-  _sfx_Rock: {fileID: 0}
-  _sfx_Fire: {fileID: 0}
+  _bgmIntro: {fileID: 0}
+  _bgmStart: {fileID: 0}
+  _sfxRock: {fileID: 0}
+  _sfxFire: {fileID: 0}
   _mainVol: 0
   _effectVol: 0
 --- !u!1 &873482166
@@ -3714,12 +3714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa82bc91bc8534249acbee32f490f9ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isIntro: 1
-  _isGameOver: 0
-  _isPause: 0
   _isTxtPauseOn: 0
   _fever: 1
-  _bestScore: 0
 --- !u!1 &968457515
 GameObject:
   m_ObjectHideFlags: 0
@@ -4956,7 +4952,7 @@ MonoBehaviour:
   _maxDelay: 0.8
   _minXpos: -2.45
   _maxXpos: 2.45
-  _list_Obj_rock: []
+  _list_Obj_Rock: []
 --- !u!4 &1362840100
 Transform:
   m_ObjectHideFlags: 0
@@ -5995,7 +5991,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dropSpeed: 4
   _rotSpeed: 90
-  _onGround: 0
 --- !u!82 &1575634339
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7234,8 +7229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e11cb644b0d78438d08d5cbe34bfdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _keyHorizontal: 0
-  _moveSpeed: 3
+  _horizontal: 0
 --- !u!95 &1872658214
 Animator:
   serializedVersion: 4
@@ -8076,5 +8070,5 @@ MonoBehaviour:
   _txt_BestScoreNum: {fileID: 0}
   _txt_ScoreNum: {fileID: 0}
   _txt_Fever: {fileID: 0}
-  _up_Sprite: {fileID: 21300000, guid: 3649a01a49d94c947820dd1c88eb3975, type: 3}
-  _push_Sprite: {fileID: 21300000, guid: 9b4b10262b3633647896ced3dbbc81ea, type: 3}
+  _sprUp: {fileID: 21300000, guid: 3649a01a49d94c947820dd1c88eb3975, type: 3}
+  _sprPush: {fileID: 21300000, guid: 9b4b10262b3633647896ced3dbbc81ea, type: 3}

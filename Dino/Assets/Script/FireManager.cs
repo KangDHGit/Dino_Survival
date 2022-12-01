@@ -2,20 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireManager : MonoBehaviour
+public class FireManager : ObstacleManager
 {
     public static FireManager I;
 
-    public GameObject _fireTemplate;
-    [SerializeField] List<GameObject> _list_Obj_FireSet;
-
-    float _nowTime;
-    float _random_delay = 0;
-    [SerializeField] float _minDelay;
-    [SerializeField] float _maxDelay;
-
-    [SerializeField] float _minXpos;
-    [SerializeField] float _maxXpos;
     private void Awake()
     {
         I = this;
@@ -23,54 +13,54 @@ public class FireManager : MonoBehaviour
 
     public void Init()
     {
-        _fireTemplate = transform.Find("FireSet").gameObject;
-        if (_fireTemplate != null)
-            _fireTemplate.SetActive(false);
-        _list_Obj_FireSet = new List<GameObject>();
+        _obstacleTemplate = transform.Find("FireSet").gameObject;
+        if (_obstacleTemplate != null)
+            _obstacleTemplate.SetActive(false);
+        _list_Obj_Obstacle = new List<GameObject>();
         DifficultyInit();
     }
 
     private void Update()
     {
-        if (GameManager.I._isIntro || GameManager.I._isGameOver || GameManager.I._isPause)
+        if (GameManager.I.IsIntro || GameManager.I.IsGameOver || GameManager.I.IsPause)
             return;
 
         _nowTime += Time.deltaTime;
-        if(_nowTime >=_random_delay)
+        if(_nowTime >=_randomDelay)
         {
-            GameObject clone = Instantiate(_fireTemplate, this.transform);
+            GameObject clone = Instantiate(_obstacleTemplate, this.transform);
             float xPos = Random.Range(_minXpos, _maxXpos);
             clone.transform.position = new Vector3(xPos, clone.transform.position.y, 0);
             clone.SetActive(true);
             if(clone.TryGetComponent(out FireSet fire))
             {
                 fire.Init();
-                _list_Obj_FireSet.Add(clone.gameObject);
+                _list_Obj_Obstacle.Add(clone.gameObject);
                 StartCoroutine(fire.ActiveWarning());
             }
-            _random_delay = Random.Range(_minDelay, _maxDelay);
+            _randomDelay = Random.Range(_minDelay, _maxDelay);
             _nowTime = 0;
         }
     }
 
-    public void DestroyFireSets()
+    public override void DestroyObstacles()
     {
-        if(_list_Obj_FireSet != null)
+        if(_list_Obj_Obstacle != null)
         {
-            foreach (GameObject Obj_FireSet in _list_Obj_FireSet)
+            foreach (GameObject obj_FireSet in _list_Obj_Obstacle)
             {
-                Destroy(Obj_FireSet);
+                Destroy(obj_FireSet);
             }
-            _list_Obj_FireSet.Clear();
+            _list_Obj_Obstacle.Clear();
         }
     }
 
-    public void DifficultyInit()
+    public override void DifficultyInit()
     {
         _minDelay = 0.7f;
         _maxDelay = 1.3f;
     }
-    public void DifficultyUp()
+    public override void DifficultyUp()
     {
         if(_maxDelay > _minDelay)
             _maxDelay -= 0.05f;
