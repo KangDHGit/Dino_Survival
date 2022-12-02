@@ -6,10 +6,10 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager I;
 
-    public GameObject _ui_Intro;
-    public GameObject _ui_Start;
-    public GameObject _ui_Pause;
-    public GameObject _ui_GameOver;
+    GameObject _ui_Intro; public GameObject UiIntro { get { return _ui_Intro; } }
+    GameObject _ui_Start; public GameObject UiStart { get { return _ui_Start; } }
+    GameObject _ui_Pause; public GameObject UiPause { get { return _ui_Pause; } }
+    GameObject _ui_GameOver; public GameObject UiGameOver { get { return _ui_GameOver; } }
 
     public Text _txt_Pause;
     public bool _isTxtPauseOn = false;

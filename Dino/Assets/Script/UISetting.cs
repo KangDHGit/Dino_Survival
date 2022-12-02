@@ -38,12 +38,12 @@ public class UISetting : MonoBehaviour
         switch (gameObject.name)
         {
             case "UI_MainBgm":
-                SoundManager.I._bgmIntro.volume = _sliderMainBgm.value;
-                SoundManager.I._bgmStart.volume = _sliderMainBgm.value;
+                SoundManager.I.BgmIntro.volume = _sliderMainBgm.value;
+                SoundManager.I.BgmStart.volume = _sliderMainBgm.value;
                 break;
             case "UI_EffectBgm":
-                SoundManager.I._sfxFire.volume = _sliderEffectBgm.value;
-                SoundManager.I._sfxRock.volume = _sliderEffectBgm.value;
+                SoundManager.I.SfxFire.volume = _sliderEffectBgm.value;
+                SoundManager.I.SfxRock.volume = _sliderEffectBgm.value;
                 break;
             default:
                 break;

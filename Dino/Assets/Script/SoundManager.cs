@@ -5,10 +5,10 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager I;
-    public AudioSource _bgmIntro;
-    public AudioSource _bgmStart;
-    public AudioSource _sfxRock;
-    public AudioSource _sfxFire;
+    AudioSource _bgmIntro; public AudioSource BgmIntro { get { return _bgmIntro; } }
+    AudioSource _bgmStart; public AudioSource BgmStart { get { return _bgmStart; } }
+    AudioSource _sfxRock; public AudioSource SfxRock { get { return _sfxRock; } }
+    AudioSource _sfxFire; public AudioSource SfxFire { get { return _sfxFire; } }
 
     float _initMainVol = 0.6f;
     public float _mainVol;

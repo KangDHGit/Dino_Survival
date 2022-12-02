@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         {
             if (!_isPause)
                 UIManager.I.OnClickSetting(true);
-            else if (UIManager.I._ui_Pause.gameObject.activeSelf)
+            else if (UIManager.I.UiPause.gameObject.activeSelf)
                 UISetting.I.OnClickExit();
         }
     }
@@ -115,9 +115,9 @@ public class GameManager : MonoBehaviour
         _isGameOver = false;
         _isPause = false;
 
-        UIManager.I._ui_Intro.SetActive(false);
-        UIManager.I._ui_Start.SetActive(true);
-        UIManager.I._ui_GameOver.SetActive(false);
+        UIManager.I.UiIntro.SetActive(false);
+        UIManager.I.UiStart.SetActive(true);
+        UIManager.I.UiGameOver.SetActive(false);
         
         RockManager.I.DestroyObstacles();
         FireManager.I.DestroyObstacles();
@@ -125,14 +125,14 @@ public class GameManager : MonoBehaviour
         _score = 0;
         UIManager.I._txt_ScoreNum.text = _score.ToString();
 
-        SoundManager.I._bgmIntro.Stop();
-        SoundManager.I._bgmStart.Play();
+        SoundManager.I.BgmIntro.Stop();
+        SoundManager.I.BgmStart.Play();
     }
     
     public void OnGameOver()
     {
         _isGameOver = true;
-        UIManager.I._ui_GameOver.SetActive(true);
+        UIManager.I.UiGameOver.SetActive(true);
     }
     
     public void PlusScore(int point)
